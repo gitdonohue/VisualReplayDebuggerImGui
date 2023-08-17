@@ -1,6 +1,6 @@
 [submodule "imgui"]
 	path = imgui
 	url = https://github.com/ocornut/imgui.git
-[submodule "glfw"]
-	path = glfw
-	url = https://github.com/glfw/glfw
+[submodule "emscripten"]
+	path = emscripten
+	url = https://github.com/emscripten-core/emscripten.git
