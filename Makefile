@@ -15,7 +15,7 @@
 
 CC = emcc
 CXX = em++
-WEB_DIR = web
+WEB_DIR = docs
 EXE = $(WEB_DIR)/index.js
 IMGUI_DIR = ./imgui
 SOURCES = main.cpp

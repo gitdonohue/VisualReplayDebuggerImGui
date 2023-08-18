@@ -4,3 +4,5 @@ VisualReplayDebuggerImGui/x64
 x64
 VisualReplayDebuggerImGui/Debug
 VisualReplayDebuggerImGui/imgui.ini
+*.tmp
+*.o
