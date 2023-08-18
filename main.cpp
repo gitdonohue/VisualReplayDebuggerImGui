@@ -119,7 +119,7 @@ static bool InitWGPU()
     surface_desc.nextInChain = &html_surface_desc;
 
     // Use 'null' instance
-    wgpu::Instance instance = {};
+    wgpu::Instance instance = wgpu::CreateInstance();
     wgpu_surface = instance.CreateSurface(&surface_desc).Release();
 
     return true;
