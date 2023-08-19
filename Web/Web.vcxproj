@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Emscripten">
+      <Configuration>Debug</Configuration>
+      <Platform>Emscripten</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Emscripten">
+      <Configuration>Release</Configuration>
+      <Platform>Emscripten</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>15.0</VCProjectVersion>
+    <ProjectGuid>{7cd71d69-c95c-4eb1-afd6-de1e7dd130ca}</ProjectGuid>
+    <RootNamespace>Web</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|Emscripten'">
+    <ConfigurationType>JSApplication</ConfigurationType>
+    <PlatformToolset>emcc</PlatformToolset>
+    <EmscriptenDir>$(EMSDK)\upstream\emscripten\</EmscriptenDir>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|Emscripten'">
+    <ConfigurationType>JSApplication</ConfigurationType>
+    <PlatformToolset>emcc</PlatformToolset>
+    <EmscriptenDir>$(EMSDK)\upstream\emscripten\</EmscriptenDir>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Emscripten'">
+    <IncludePath>$(SysRoot)\include\c++\v1;$(SysRoot)\include\compat\;$(SysRoot)\include;$(ProjectDir)..;$(ProjectDir)..\imgui\backends;$(ProjectDir)..\imgui;</IncludePath>
+    <LibraryPath>$(ProjectDir)..\libs</LibraryPath>
+    <OutDir>$(SolutionDir)docs\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Emscripten'">
+    <IncludePath>$(SysRoot)\include\c++\v1;$(SysRoot)\include\compat\;$(SysRoot)\include;$(ProjectDir)..;$(ProjectDir)..\imgui\backends;$(ProjectDir)..\imgui;</IncludePath>
+    <LibraryPath>$(ProjectDir)..\libs</LibraryPath>
+    <OutDir>$(SolutionDir)docs\</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Emscripten'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..;$(ProjectDir)..\imgui\backends;$(ProjectDir)..\imgui</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IMGUI_DISABLE_FILE_FUNCTIONS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalLinkDirectories>..\libs</AdditionalLinkDirectories>
+      <AdditionalDependencies>glfw;glfw3;GL</AdditionalDependencies>
+      <AdditionalOptions>-s USE_GLFW=3 -s USE_WEBGPU=1 -s WASM=1 -s ALLOW_MEMORY_GROWTH=1 -s NO_EXIT_RUNTIME=0 -s ASSERTIONS=1 -s NO_FILESYSTEM=1 -s DISABLE_EXCEPTION_CATCHING=1 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <ProjectReference />
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Emscripten'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)..;$(ProjectDir)..\imgui\backends;$(ProjectDir)..\imgui</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IMGUI_DISABLE_FILE_FUNCTIONS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalLinkDirectories>..\libs</AdditionalLinkDirectories>
+      <AdditionalDependencies>glfw;glfw3;GL</AdditionalDependencies>
+      <AdditionalOptions>-s USE_GLFW=3 -s USE_WEBGPU=1 -s WASM=1 -s ALLOW_MEMORY_GROWTH=1 -s NO_EXIT_RUNTIME=0 -s ASSERTIONS=1 -s NO_FILESYSTEM=1 -s DISABLE_EXCEPTION_CATCHING=1 %(AdditionalOptions)</AdditionalOptions>
+    </Link>
+    <ProjectReference />
+    <ProjectReference>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\imgui\backends\imgui_impl_glfw.cpp" />
+    <ClCompile Include="..\imgui\backends\imgui_impl_wgpu.cpp" />
+    <ClCompile Include="..\imgui\imgui.cpp" />
+    <ClCompile Include="..\imgui\imgui_demo.cpp" />
+    <ClCompile Include="..\imgui\imgui_draw.cpp" />
+    <ClCompile Include="..\imgui\imgui_tables.cpp" />
+    <ClCompile Include="..\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\imgui\backends\imgui_impl_glfw.h" />
+    <ClInclude Include="..\imgui\backends\imgui_impl_wgpu.h" />
+    <ClInclude Include="..\imgui\imconfig.h" />
+    <ClInclude Include="..\imgui\imgui.h" />
+    <ClInclude Include="..\imgui\imgui_internal.h" />
+    <ClInclude Include="..\imgui\imstb_rectpack.h" />
+    <ClInclude Include="..\imgui\imstb_textedit.h" />
+    <ClInclude Include="..\imgui\imstb_truetype.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

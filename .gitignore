@@ -6,3 +6,4 @@ VisualReplayDebuggerImGui/Debug
 VisualReplayDebuggerImGui/imgui.ini
 *.tmp
 *.o
+Debug/
