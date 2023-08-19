@@ -35,20 +35,9 @@ static bool InitWGPU();
 static void print_glfw_error(int error, const char* description);
 static void print_wgpu_error(WGPUErrorType error_type, const char* message, void*);
 
-// Function used by c++ to get the size of the html canvas
-EM_JS(int, canvas_get_width, (), {
-  return Module.canvas.width;
-    });
-
-// Function used by c++ to get the size of the html canvas
-EM_JS(int, canvas_get_height, (), {
-  return Module.canvas.height;
-    });
-
-// Function called by javascript
-EM_JS(void, resizeCanvas, (), {
-  js_resizeCanvas();
-    });
+EM_JS(int, canvas_get_width, (), { return Module.canvas.width; });
+EM_JS(int, canvas_get_height, (), { return Module.canvas.height; });
+EM_JS(void, resizeCanvas, (), { js_resizeCanvas(); });
 
 // Main code
 int main(int, char**)
@@ -157,9 +146,13 @@ static void MainLoopStep(void* window)
     int canvas_width = canvas_get_width();
     int canvas_height = canvas_get_height();
     glfwSetWindowSize((GLFWwindow*)window, canvas_width, canvas_height);
+    //printf("Canvas Size: %d, %d\n", canvas_width, canvas_height);
+    ImGui::SetCurrentContext(ImGui::GetCurrentContext());
 
     int width, height;
     glfwGetFramebufferSize((GLFWwindow*)window, &width, &height);
+
+    //printf("glfwGetFramebufferSize: %d, %d\n", width, height);
 
     // React to changes in screen size
     if (width != wgpu_swap_chain_width && height != wgpu_swap_chain_height)
