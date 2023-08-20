@@ -1,7 +1,7 @@
-// Dear ImGui: standalone example application for GLFW + OpenGL 3, using programmable pipeline
-// (GLFW is a cross-platform general purpose library for handling windows, inputs, OpenGL/Vulkan/Metal graphics context creation, etc.)
-// If you are new to Dear ImGui, read documentation from the docs/ folder + read the top of imgui.cpp.
-// Read online: https://github.com/ocornut/imgui/tree/master/docs
+
+#include <fstream>
+#include "VrdCaptureReader.hpp"
+
 
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
@@ -33,6 +33,10 @@ static void glfw_error_callback(int error, const char* description)
 // Main code
 int main(int, char**)
 {
+    VrdCaptureReader reader;
+    std::ifstream ifs("../sample.vrd", std::ifstream::in | std::ifstream::app | std::ifstream::binary);
+    reader.Read(ifs);
+
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit())
         return 1;

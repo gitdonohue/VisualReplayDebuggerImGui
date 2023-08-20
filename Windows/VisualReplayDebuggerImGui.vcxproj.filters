@@ -13,57 +13,99 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\inflatecpp">
+      <UniqueIdentifier>{a38a940d-bf7f-492a-8e5e-afed0353e5fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\imgui">
+      <UniqueIdentifier>{c860aa05-f5ae-4e81-a76f-e2599c047995}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\imgui\imgui.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui\imgui_demo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui\imgui_draw.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui\imgui_tables.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui\imgui_widgets.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui\backends\imgui_impl_glfw.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\imgui\backends\imgui_impl_opengl3.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main_win32.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\VrdCaptureReader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui\imgui.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui\imgui_demo.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui\imgui_draw.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui\backends\imgui_impl_glfw.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui\backends\imgui_impl_opengl3.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui\imgui_tables.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\imgui\imgui_widgets.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\inflatecpp\adler32.cc">
+      <Filter>Source Files\inflatecpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\inflatecpp\bit_reader.cc">
+      <Filter>Source Files\inflatecpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\inflatecpp\crc32.cc">
+      <Filter>Source Files\inflatecpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\inflatecpp\decompressor.cc">
+      <Filter>Source Files\inflatecpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\inflatecpp\huffman_decoder.cc">
+      <Filter>Source Files\inflatecpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\imgui\imconfig.h">
+    <ClInclude Include="..\src\VrdCaptureReader.hpp">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui\imconfig.h">
+      <Filter>Source Files\imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\imgui\imgui.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui\imgui_internal.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui\imstb_rectpack.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui\imstb_textedit.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\imgui\imstb_truetype.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\imgui\backends\imgui_impl_glfw.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\imgui</Filter>
     </ClInclude>
     <ClInclude Include="..\imgui\backends\imgui_impl_opengl3.h">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui\imgui_internal.h">
+      <Filter>Source Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui\imstb_rectpack.h">
+      <Filter>Source Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui\imstb_textedit.h">
+      <Filter>Source Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\imgui\imstb_truetype.h">
+      <Filter>Source Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inflatecpp\adler32.h">
+      <Filter>Source Files\inflatecpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inflatecpp\bit_reader.h">
+      <Filter>Source Files\inflatecpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inflatecpp\crc32.h">
+      <Filter>Source Files\inflatecpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inflatecpp\decompressor.h">
+      <Filter>Source Files\inflatecpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inflatecpp\huffman_decoder.h">
+      <Filter>Source Files\inflatecpp</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

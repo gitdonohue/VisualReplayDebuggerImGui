@@ -72,12 +72,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)..;$(ProjectDir)..\imgui\backends;$(ProjectDir)..\imgui;$(ProjectDir)..\glew\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..;$(ProjectDir)..\src;$(ProjectDir)..\zlib;$(ProjectDir)..\imgui\backends;$(ProjectDir)..\imgui;$(ProjectDir)..\glew\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <TargetName>VisualReplayDebugger</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)..;$(ProjectDir)..\imgui\backends;$(ProjectDir)..\imgui;$(ProjectDir)..\glew\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)..;$(ProjectDir)..\src;$(ProjectDir)..\zlib;$(ProjectDir)..\imgui\backends;$(ProjectDir)..\imgui;$(ProjectDir)..\glew\include;$(VC_IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <TargetName>VisualReplayDebugger</TargetName>
   </PropertyGroup>
@@ -151,6 +151,12 @@
     <ClCompile Include="..\imgui\imgui_draw.cpp" />
     <ClCompile Include="..\imgui\imgui_tables.cpp" />
     <ClCompile Include="..\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="..\inflatecpp\adler32.cc" />
+    <ClCompile Include="..\inflatecpp\bit_reader.cc" />
+    <ClCompile Include="..\inflatecpp\crc32.cc" />
+    <ClCompile Include="..\inflatecpp\decompressor.cc" />
+    <ClCompile Include="..\inflatecpp\huffman_decoder.cc" />
+    <ClCompile Include="..\src\VrdCaptureReader.cpp" />
     <ClCompile Include="main_win32.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +168,12 @@
     <ClInclude Include="..\imgui\imstb_rectpack.h" />
     <ClInclude Include="..\imgui\imstb_textedit.h" />
     <ClInclude Include="..\imgui\imstb_truetype.h" />
+    <ClInclude Include="..\inflatecpp\adler32.h" />
+    <ClInclude Include="..\inflatecpp\bit_reader.h" />
+    <ClInclude Include="..\inflatecpp\crc32.h" />
+    <ClInclude Include="..\inflatecpp\decompressor.h" />
+    <ClInclude Include="..\inflatecpp\huffman_decoder.h" />
+    <ClInclude Include="..\src\VrdCaptureReader.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
