@@ -115,6 +115,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -132,6 +133,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -156,7 +158,9 @@
     <ClCompile Include="..\inflatecpp\crc32.cc" />
     <ClCompile Include="..\inflatecpp\decompressor.cc" />
     <ClCompile Include="..\inflatecpp\huffman_decoder.cc" />
-    <ClCompile Include="..\src\VrdCaptureReader.cpp" />
+    <ClCompile Include="..\src\ReplayContext.cpp" />
+    <ClCompile Include="..\src\ReplayLogsWindow.cpp" />
+    <ClCompile Include="..\src\ReplayData.cpp" />
     <ClCompile Include="main_win32.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -173,7 +177,9 @@
     <ClInclude Include="..\inflatecpp\crc32.h" />
     <ClInclude Include="..\inflatecpp\decompressor.h" />
     <ClInclude Include="..\inflatecpp\huffman_decoder.h" />
-    <ClInclude Include="..\src\VrdCaptureReader.hpp" />
+    <ClInclude Include="..\src\ReplayContext.hpp" />
+    <ClInclude Include="..\src\ReplayLogsWindow.hpp" />
+    <ClInclude Include="..\src\ReplayData.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

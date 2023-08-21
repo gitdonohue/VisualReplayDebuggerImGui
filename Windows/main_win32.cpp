@@ -1,7 +1,5 @@
 
 #include <fstream>
-#include "VrdCaptureReader.hpp"
-
 
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
@@ -25,6 +23,10 @@
 #include "../libs/emscripten/emscripten_mainloop_stub.h"
 #endif
 
+#include <ReplayData.hpp>
+#include <ReplayContext.hpp>
+#include <ReplayLogsWindow.hpp>
+
 static void glfw_error_callback(int error, const char* description)
 {
     fprintf(stderr, "GLFW Error %d: %s\n", error, description);
@@ -33,9 +35,12 @@ static void glfw_error_callback(int error, const char* description)
 // Main code
 int main(int, char**)
 {
-    VrdCaptureReader reader;
+    VisualReplayDebugger::ReplayData reader;
     std::ifstream ifs("../sample.vrd", std::ifstream::in | std::ifstream::app | std::ifstream::binary);
     reader.Read(ifs);
+    VisualReplayDebugger::ReplayContext replayContext(reader);
+
+    VisualReplayDebugger::ReplayLogsWindow logsWindow(replayContext);
 
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit())
@@ -166,6 +171,9 @@ int main(int, char**)
             ImGui::Text("counter = %d", counter);
 
             ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+
+            logsWindow.Draw();
+
             ImGui::End();
         }
 

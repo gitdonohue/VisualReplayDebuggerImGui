@@ -24,7 +24,7 @@
     <ClCompile Include="main_win32.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\VrdCaptureReader.cpp">
+    <ClCompile Include="..\src\ReplayData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\imgui\imgui.cpp">
@@ -63,9 +63,15 @@
     <ClCompile Include="..\inflatecpp\huffman_decoder.cc">
       <Filter>Source Files\inflatecpp</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\ReplayLogsWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ReplayContext.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\VrdCaptureReader.hpp">
+    <ClInclude Include="..\src\ReplayData.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="..\imgui\imconfig.h">
@@ -106,6 +112,12 @@
     </ClInclude>
     <ClInclude Include="..\inflatecpp\huffman_decoder.h">
       <Filter>Source Files\inflatecpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ReplayLogsWindow.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ReplayContext.hpp">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
