@@ -1,15 +1,17 @@
 #pragma once
 
-#include <ReplayData.hpp>
+#include "ReplayData.hpp"
 
 namespace VisualReplayDebugger
 {
 	class ReplayContext
 	{
 	public:
-		ReplayContext(const ReplayData& reader);
+		ReplayContext(const ReplayData& replayData);
+		
+		inline const ReplayData& GetReplayData() { return replayData; }
 
-	public:
-		const ReplayData& reader;
+	private:
+		const ReplayData& replayData;
 	};
 };

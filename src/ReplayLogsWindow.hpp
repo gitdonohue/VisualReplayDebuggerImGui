@@ -1,6 +1,9 @@
 #pragma once
 
-#include <ReplayContext.hpp>
+#include "ReplayContext.hpp"
+
+#include <string>
+#include <vector>
 
 namespace VisualReplayDebugger
 {
@@ -11,5 +14,7 @@ namespace VisualReplayDebugger
 		void Draw();
 	private:
 		ReplayContext& replayContext;
+
+		std::vector<std::string> log_headers;
 	};
 };

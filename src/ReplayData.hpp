@@ -18,8 +18,10 @@ namespace VisualReplayDebugger
 
 	struct LogEntry
 	{
+		int id = 0;
 		int entity = -1;
 		int frame = -1;
+		float time = 0;
 		std::string category;
 		std::string message;
 		Color color;
@@ -51,14 +53,18 @@ namespace VisualReplayDebugger
 
 	public:
 		void Read(std::istream& input);
+
 		inline int LogCount() const { return (int)logs.size(); }
 		inline const LogEntry& GetLogEntry(int index) const { return logs.at(index); }
+		inline const std::vector<LogEntry>& GetLogs() const { return logs; }
+		
+		float GetTimeForFrame(int frame) const;
 
 	private:
 		void ReadInternal(std::istream& input);
 
 	private:
-		std::list<float> frametimes;
+		std::vector<float> frametimes;
 		std::list<int> framesForTimes;
 		std::map<int, FrameRange> entityLifetimes;
 

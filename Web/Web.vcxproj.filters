@@ -23,6 +23,30 @@
     <ClCompile Include="..\imgui\imgui_widgets.cpp">
       <Filter>imgui</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\ReplayContext.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ReplayData.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ReplayLogsWindow.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\inflatecpp\adler32.cc">
+      <Filter>inflatecpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\inflatecpp\bit_reader.cc">
+      <Filter>inflatecpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\inflatecpp\crc32.cc">
+      <Filter>inflatecpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\inflatecpp\decompressor.cc">
+      <Filter>inflatecpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\inflatecpp\huffman_decoder.cc">
+      <Filter>inflatecpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\imgui\imstb_truetype.h">
@@ -49,6 +73,30 @@
     <ClInclude Include="..\imgui\imstb_textedit.h">
       <Filter>imgui</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\ReplayContext.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ReplayData.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ReplayLogsWindow.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inflatecpp\adler32.h">
+      <Filter>inflatecpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inflatecpp\bit_reader.h">
+      <Filter>inflatecpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inflatecpp\crc32.h">
+      <Filter>inflatecpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inflatecpp\decompressor.h">
+      <Filter>inflatecpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inflatecpp\huffman_decoder.h">
+      <Filter>inflatecpp</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\docs\index.html" />
@@ -56,6 +104,12 @@
   <ItemGroup>
     <Filter Include="imgui">
       <UniqueIdentifier>{e0b5f43a-7f52-4401-bbcb-6180f9098e09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{daf46d79-3eaa-4f18-9535-7ee73c372f3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="inflatecpp">
+      <UniqueIdentifier>{3674d9a0-e516-4a88-ae0c-8d662f6b0cfb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

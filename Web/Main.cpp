@@ -22,6 +22,12 @@
 #include <webgpu/webgpu.h>
 #include <webgpu/webgpu_cpp.h>
 
+#include <src/ReplayData.hpp>
+#include <src/ReplayContext.hpp>
+#include <src/ReplayLogsWindow.hpp>
+
+#include <fstream>
+
 // Global WebGPU required states
 static WGPUDevice    wgpu_device = nullptr;
 static WGPUSurface   wgpu_surface = nullptr;
@@ -39,9 +45,18 @@ EM_JS(int, canvas_get_width, (), { return Module.canvas.width; });
 EM_JS(int, canvas_get_height, (), { return Module.canvas.height; });
 EM_JS(void, resizeCanvas, (), { js_resizeCanvas(); });
 
+static VisualReplayDebugger::ReplayData s_replayData;
+static VisualReplayDebugger::ReplayContext* s_pReplayContext = nullptr;
+static VisualReplayDebugger::ReplayLogsWindow* s_pLogsWindow = nullptr;
+
 // Main code
 int main(int, char**)
 {
+    std::ifstream ifs("sample.vrd", std::ifstream::in | std::ifstream::app | std::ifstream::binary);
+    s_replayData.Read(ifs);
+    s_pReplayContext = new VisualReplayDebugger::ReplayContext(s_replayData);
+    s_pLogsWindow = new VisualReplayDebugger::ReplayLogsWindow(*s_pReplayContext);
+
     glfwSetErrorCallback(print_glfw_error);
     if (!glfwInit())
         return 1;
@@ -209,17 +224,16 @@ static void MainLoopStep(void* window)
             ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
             ImGui::End();
         }
-
+    */
         // 3. Show another simple window.
-        if (show_another_window)
+        if (s_pLogsWindow != nullptr)
         {
-            ImGui::Begin("Another Window", &show_another_window);         // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
+            ImGui::Begin("Another Window");
             ImGui::Text("Hello from another window!");
-            if (ImGui::Button("Close Me"))
-                show_another_window = false;
+            s_pLogsWindow->Draw();
             ImGui::End();
         }
-    */
+
     // Rendering
     ImGui::Render();
 

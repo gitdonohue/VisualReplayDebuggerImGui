@@ -25,7 +25,9 @@
 
 #include <ReplayData.hpp>
 #include <ReplayContext.hpp>
+
 #include <ReplayLogsWindow.hpp>
+#include <ReplayEntitiesWindow.hpp>
 
 static void glfw_error_callback(int error, const char* description)
 {
@@ -35,12 +37,13 @@ static void glfw_error_callback(int error, const char* description)
 // Main code
 int main(int, char**)
 {
-    VisualReplayDebugger::ReplayData reader;
-    std::ifstream ifs("../sample.vrd", std::ifstream::in | std::ifstream::app | std::ifstream::binary);
-    reader.Read(ifs);
-    VisualReplayDebugger::ReplayContext replayContext(reader);
+    VisualReplayDebugger::ReplayData replayData;
+    std::ifstream ifs("../test/sample.vrd", std::ifstream::in | std::ifstream::app | std::ifstream::binary);
+    replayData.Read(ifs);
+    VisualReplayDebugger::ReplayContext replayContext(replayData);
 
     VisualReplayDebugger::ReplayLogsWindow logsWindow(replayContext);
+    VisualReplayDebugger::ReplayEntitiesWindow entitiesWindow(replayContext);
 
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit())
@@ -147,6 +150,10 @@ int main(int, char**)
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
+        logsWindow.Draw();
+        
+        entitiesWindow.Draw();
+
         // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
         if (show_demo_window)
             ImGui::ShowDemoWindow(&show_demo_window);
@@ -172,20 +179,19 @@ int main(int, char**)
 
             ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
 
-            logsWindow.Draw();
-
             ImGui::End();
         }
 
-        // 3. Show another simple window.
-        if (show_another_window)
-        {
-            ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
-            ImGui::Text("Hello from another window!");
-            if (ImGui::Button("Close Me"))
-                show_another_window = false;
-            ImGui::End();
-        }
+
+        //// 3. Show another simple window.
+        //if (show_another_window)
+        //{
+        //    ImGui::Begin("Another Window", &show_another_window);   // Pass a pointer to our bool variable (the window will have a closing button that will clear the bool when clicked)
+        //    ImGui::Text("Hello from another window!");
+        //    if (ImGui::Button("Close Me"))
+        //        show_another_window = false;
+        //    ImGui::End();
+        //}
 
         // Rendering
         ImGui::Render();

@@ -384,7 +384,7 @@ void ReplayData::ReadInternal(std::istream& input)
 				//LogCategories.Add(category);
 				//LogColors.Add(color);
 				//LogEntries.AddForBake(frame, (entity, category, msg, color));
-				logs.emplace_back(LogEntry{ entity.Id, frame, category, msg, color });
+				logs.emplace_back(LogEntry{ (int)logs.size(), entity.Id, frame, GetTimeForFrame(frame), category, msg, color });
 
 				//// Add per entity frame markers
 				//if (!LogEntityFrameMarkers.TryGetValue(entity, out var framesWithLogs))
@@ -476,4 +476,12 @@ void ReplayData::ReadInternal(std::istream& input)
 			}
 		}
 	}
+ }
+
+ float ReplayData::GetTimeForFrame(int frame) const
+ {
+	 int frameCount = (int)frametimes.size();
+	 if (frameCount == 0) return 0;
+	 frame = std::clamp(frame, 0, frameCount-1);
+	 return frametimes.at(frame);
  }

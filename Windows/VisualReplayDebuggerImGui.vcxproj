@@ -159,6 +159,7 @@
     <ClCompile Include="..\inflatecpp\decompressor.cc" />
     <ClCompile Include="..\inflatecpp\huffman_decoder.cc" />
     <ClCompile Include="..\src\ReplayContext.cpp" />
+    <ClCompile Include="..\src\ReplayEntitiesWindow.cpp" />
     <ClCompile Include="..\src\ReplayLogsWindow.cpp" />
     <ClCompile Include="..\src\ReplayData.cpp" />
     <ClCompile Include="main_win32.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="..\inflatecpp\decompressor.h" />
     <ClInclude Include="..\inflatecpp\huffman_decoder.h" />
     <ClInclude Include="..\src\ReplayContext.hpp" />
+    <ClInclude Include="..\src\ReplayEntitiesWindow.hpp" />
     <ClInclude Include="..\src\ReplayLogsWindow.hpp" />
     <ClInclude Include="..\src\ReplayData.hpp" />
   </ItemGroup>

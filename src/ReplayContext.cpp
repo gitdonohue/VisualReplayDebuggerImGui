@@ -2,8 +2,8 @@
 
 using namespace VisualReplayDebugger;
 
-ReplayContext::ReplayContext(const ReplayData& reader)
-	: reader(reader)
+ReplayContext::ReplayContext(const ReplayData& replayData)
+	: replayData(replayData)
 {
 
 }

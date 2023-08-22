@@ -3,17 +3,26 @@
 
 #include <imgui.h>
 #include <string>
-#include <format>
 
 using namespace VisualReplayDebugger;
 
 ReplayLogsWindow::ReplayLogsWindow(ReplayContext& ctx)
     : replayContext(ctx)
 {
+    // Pre-build log headers
+    log_headers.reserve(replayContext.GetReplayData().LogCount());
+    for (const LogEntry& entry : replayContext.GetReplayData().GetLogs())
+    {
+        char buff[1024];
+        snprintf(buff, 1024, "%d %f (%d) [%s] ", entry.id, entry.time, entry.frame, entry.category.c_str());
+        log_headers.emplace_back(buff);
+    }
 }
 
 void ReplayLogsWindow::Draw()
 {
+    const auto& replayData = replayContext.GetReplayData();
+
     if (!ImGui::Begin("title"))
     {
         ImGui::End();
@@ -55,18 +64,17 @@ void ReplayLogsWindow::Draw()
         //else
         {
             ImGuiListClipper clipper;
-            clipper.Begin(replayContext.reader.LogCount());
+            clipper.Begin(replayData.LogCount());
             while (clipper.Step())
             {
                 for (int line_no = clipper.DisplayStart; line_no < clipper.DisplayEnd; line_no++)
                 {
-                    const auto& entry = replayContext.reader.GetLogEntry(line_no);
+                    const auto& entry = replayData.GetLogEntry(line_no);
 
                     const char* line_start = entry.message.c_str();
                     const char* line_end = line_start + entry.message.length();
 
-                    const std::string line_header = std::format("{} ({}) [{}] ", line_no, entry.frame, entry.category); // Note: we might want to pre-build these strings
-                    ImGui::TextUnformatted(line_header.c_str());
+                    ImGui::TextUnformatted(log_headers.at(line_no).c_str());
                     ImGui::SameLine();
 
                     ImGui::PushStyleColor(ImGuiCol_Text, ReplayData::GetColorValue(entry.color));
