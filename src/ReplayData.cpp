@@ -351,6 +351,7 @@ void ReplayData::ReadInternal(std::istream& input)
 			case BlockType::EntityDef: break;
 			case BlockType::EntityUndef:
 			{
+				entity.DestructionFrame = frame;
 				entityLifetimes[entity.Id] = FrameRange{ entity.CreationFrame, frame };
 			}
 			break;
@@ -384,8 +385,7 @@ void ReplayData::ReadInternal(std::istream& input)
 				//LogCategories.Add(category);
 				//LogColors.Add(color);
 				//LogEntries.AddForBake(frame, (entity, category, msg, color));
-				logs.emplace_back(LogEntry{ (int)logs.size(), entity.Id, frame, GetTimeForFrame(frame), category, msg, color });
-
+				logs.emplace_back(LogEntry{ (int)logs.size(), &entity, frame, GetTimeForFrame(frame), category, msg, color });
 				//// Add per entity frame markers
 				//if (!LogEntityFrameMarkers.TryGetValue(entity, out var framesWithLogs))
 				//{
@@ -476,12 +476,26 @@ void ReplayData::ReadInternal(std::istream& input)
 			}
 		}
 	}
+
+	// fill acceleration structures
+	for (LogEntry& logEntry : logs)
+	{
+		logEntry.entity->Logs.push_back(&logEntry);
+	}
+ }
+
+ float ReplayData::GetTotalTime() const
+ {
+	 int frameCount = (int)frametimes.size();
+	 if (frameCount == 0) return 1.192092896e-07F; //FTL_EPSILON
+	 return frametimes.at((size_t)frameCount - 1); // last frame time
  }
 
  float ReplayData::GetTimeForFrame(int frame) const
  {
 	 int frameCount = (int)frametimes.size();
 	 if (frameCount == 0) return 0;
+	 if (frame < 0) return GetTotalTime();
 	 frame = std::clamp(frame, 0, frameCount-1);
 	 return frametimes.at(frame);
  }

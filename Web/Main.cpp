@@ -21,12 +21,13 @@
 #include <GLFW/glfw3.h>
 #include <webgpu/webgpu.h>
 #include <webgpu/webgpu_cpp.h>
+#include <fstream>
 
 #include <src/ReplayData.hpp>
 #include <src/ReplayContext.hpp>
 #include <src/ReplayLogsWindow.hpp>
-
-#include <fstream>
+#include <src/ReplayEntitiesWindow.hpp>
+#include <src/ReplayTimelineSlider.hpp>
 
 // Global WebGPU required states
 static WGPUDevice    wgpu_device = nullptr;
@@ -48,6 +49,8 @@ EM_JS(void, resizeCanvas, (), { js_resizeCanvas(); });
 static VisualReplayDebugger::ReplayData s_replayData;
 static VisualReplayDebugger::ReplayContext* s_pReplayContext = nullptr;
 static VisualReplayDebugger::ReplayLogsWindow* s_pLogsWindow = nullptr;
+static VisualReplayDebugger::ReplayEntitiesWindow* s_entitiesWindow = nullptr;
+static VisualReplayDebugger::ReplayTimelineWindow* s_timelineWindow = nullptr;
 
 // Main code
 int main(int, char**)
@@ -56,6 +59,8 @@ int main(int, char**)
     s_replayData.Read(ifs);
     s_pReplayContext = new VisualReplayDebugger::ReplayContext(s_replayData);
     s_pLogsWindow = new VisualReplayDebugger::ReplayLogsWindow(*s_pReplayContext);
+    s_entitiesWindow = new VisualReplayDebugger::ReplayEntitiesWindow(*s_pReplayContext);
+    s_timelineWindow = new VisualReplayDebugger::ReplayTimelineWindow(*s_pReplayContext);
 
     glfwSetErrorCallback(print_glfw_error);
     if (!glfwInit())
@@ -87,6 +92,7 @@ int main(int, char**)
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
 
     // For an Emscripten build we are disabling file-system access, so let's not attempt to do a fopen() of the imgui.ini file.
     // You may manually call LoadIniSettingsFromMemory() to load settings from your own storage.
@@ -95,6 +101,8 @@ int main(int, char**)
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
     //ImGui::StyleColorsLight();
+
+    //ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
 
     // Setup Platform/Renderer backends
     ImGui_ImplGlfw_InitForOther(window, true);
@@ -225,14 +233,18 @@ static void MainLoopStep(void* window)
             ImGui::End();
         }
     */
-        // 3. Show another simple window.
-        if (s_pLogsWindow != nullptr)
-        {
-            ImGui::Begin("Another Window");
-            ImGui::Text("Hello from another window!");
-            s_pLogsWindow->Draw();
-            ImGui::End();
-        }
+        //// 3. Show another simple window.
+        //if (s_pLogsWindow != nullptr)
+        //{
+        //    ImGui::Begin("Another Window");
+        //    ImGui::Text("Hello from another window!");
+        //    s_pLogsWindow->Draw();
+        //    ImGui::End();
+        //}
+
+    s_timelineWindow->Draw();
+    s_entitiesWindow->Draw();
+    s_pLogsWindow->Draw();
 
     // Rendering
     ImGui::Render();

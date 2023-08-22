@@ -2,6 +2,8 @@
 #include "ReplayContext.hpp"
 
 #include <imgui.h>
+#include <imgui_internal.h>
+
 #include <string>
 
 using namespace VisualReplayDebugger;
@@ -21,9 +23,27 @@ ReplayLogsWindow::ReplayLogsWindow(ReplayContext& ctx)
 
 void ReplayLogsWindow::Draw()
 {
+    auto& g = *GImGui;
     const auto& replayData = replayContext.GetReplayData();
 
-    if (!ImGui::Begin("title"))
+    replayContext.hoveredLogEntry = nullptr;
+
+    int firstLine = 0;
+    for (const auto& entry : replayData.GetLogs())
+    {
+        if (entry.frame >= replayContext.roi.start) break;
+        ++firstLine;
+    }
+
+    int lastLine = 0;
+    for (const auto& entry : replayData.GetLogs())
+    {
+        if (entry.frame > replayContext.roi.end) break;
+        ++lastLine;
+    }
+    int numLines = lastLine - firstLine;
+
+    if (!ImGui::Begin("ReplayLogsWindow"))
     {
         ImGui::End();
         return;
@@ -46,40 +66,62 @@ void ReplayLogsWindow::Draw()
         //if (copy)
         //    ImGui::LogToClipboard();
 
+        const ImU32 col_text = ImGui::GetColorU32(ImGuiCol_Text);
+        const ImU32 col_active_frame = ImGui::GetColorU32(ImGuiCol_NavHighlight);
+        
+        const ImGuiStyle& style = g.Style;
+        const auto blockHeight = ImGui::GetTextLineHeight();// +(style.FramePadding.y * 2);
+        ImDrawList& draw_list = *ImGui::GetWindowDrawList();
+
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
-        //if (Filter.IsActive())
-        //{
-        //    // In this example we don't use the clipper when Filter is enabled.
-        //    // This is because we don't have random access to the result of our filter.
-        //    // A real application processing logs with ten of thousands of entries may want to store the result of
-        //    // search/filter.. especially if the filtering function is not trivial (e.g. reg-exp).
-        //    for (int line_no = 0; line_no < LineOffsets.Size; line_no++)
-        //    {
-        //        const char* line_start = buf + LineOffsets[line_no];
-        //        const char* line_end = (line_no + 1 < LineOffsets.Size) ? (buf + LineOffsets[line_no + 1] - 1) : buf_end;
-        //        if (Filter.PassFilter(line_start, line_end))
-        //            ImGui::TextUnformatted(line_start, line_end);
-        //    }
-        //}
-        //else
         {
             ImGuiListClipper clipper;
-            clipper.Begin(replayData.LogCount());
+            clipper.Begin(lastLine - firstLine);
             while (clipper.Step())
             {
                 for (int line_no = clipper.DisplayStart; line_no < clipper.DisplayEnd; line_no++)
                 {
-                    const auto& entry = replayData.GetLogEntry(line_no);
+                    const auto& entry = replayData.GetLogEntry(firstLine + line_no);
+
+                    ImVec2 block_origin = ImGui::GetCursorScreenPos();
+
+                    if (entry.frame == replayContext.cursorFrame)
+                    {
+                        ImVec2 block_bottom = block_origin;
+                        block_bottom.x += 300;
+                        block_bottom.y += blockHeight;
+                        ImColor col = col_active_frame;
+                        draw_list.AddRectFilledMultiColor(block_origin, block_bottom, col, col & 0x00FFFFFF, col & 0x00FFFFFF, col);
+                    }
 
                     const char* line_start = entry.message.c_str();
                     const char* line_end = line_start + entry.message.length();
 
-                    ImGui::TextUnformatted(log_headers.at(line_no).c_str());
-                    ImGui::SameLine();
+                    ImGui::PushStyleColor(ImGuiCol_Text, col_text);
+                    ImGui::TextUnformatted(log_headers.at(firstLine + line_no).c_str());
+                    ImGui::PopStyleColor();
+                    bool isHeaderHovered = ImGui::IsItemHovered();
 
+                    ImGui::SameLine();
                     ImGui::PushStyleColor(ImGuiCol_Text, ReplayData::GetColorValue(entry.color));
                     ImGui::TextUnformatted(line_start, line_end);
                     ImGui::PopStyleColor();
+                    bool isTextHovered = ImGui::IsItemHovered();
+
+                    if (isHeaderHovered || isTextHovered)
+                    {
+                        replayContext.hoveredLogEntry = &entry;
+
+                        if (ImGui::IsMouseClicked(0, false))
+                        {
+                            replayContext.cursorFrame = entry.frame;
+                        }
+                        //ImVec2 block_bottom = block_origin;
+                        //block_bottom.x += 300;
+                        //block_bottom.y += blockHeight;
+                        //ImColor col = col_active_frame;
+                        //draw_list.AddRectFilledMultiColor(block_origin, block_bottom, col, col & 0x00FFFFFF, col & 0x00FFFFFF, col);
+                    }
                 }
             }
             clipper.End();

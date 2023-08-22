@@ -75,6 +75,9 @@
     <ClCompile Include="..\src\ReplayEntitiesWindow.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\ReplayTimelineSlider.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\imgui\imconfig.h">
@@ -126,6 +129,9 @@
       <Filter>Source Files\src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\ReplayEntitiesWindow.hpp">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ReplayTimelineSlider.hpp">
       <Filter>Source Files\src</Filter>
     </ClInclude>
   </ItemGroup>

@@ -4,6 +4,9 @@
 
 namespace VisualReplayDebugger
 {
+	struct LogEntry;
+
+	// Replay context holds the global time cursor and window.
 	class ReplayContext
 	{
 	public:
@@ -13,5 +16,11 @@ namespace VisualReplayDebugger
 
 	private:
 		const ReplayData& replayData;
+
+	public:
+		int cursorFrame = 0;
+		FrameRange roi;
+
+		const LogEntry* hoveredLogEntry;
 	};
 };

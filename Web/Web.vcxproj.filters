@@ -47,6 +47,12 @@
     <ClCompile Include="..\inflatecpp\huffman_decoder.cc">
       <Filter>inflatecpp</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\ReplayEntitiesWindow.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ReplayTimelineSlider.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\imgui\imstb_truetype.h">
@@ -96,6 +102,12 @@
     </ClInclude>
     <ClInclude Include="..\inflatecpp\huffman_decoder.h">
       <Filter>inflatecpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ReplayEntitiesWindow.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ReplayTimelineSlider.hpp">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

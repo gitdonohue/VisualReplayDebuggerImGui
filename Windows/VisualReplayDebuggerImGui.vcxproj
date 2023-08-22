@@ -162,6 +162,7 @@
     <ClCompile Include="..\src\ReplayEntitiesWindow.cpp" />
     <ClCompile Include="..\src\ReplayLogsWindow.cpp" />
     <ClCompile Include="..\src\ReplayData.cpp" />
+    <ClCompile Include="..\src\ReplayTimelineSlider.cpp" />
     <ClCompile Include="main_win32.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -182,6 +183,7 @@
     <ClInclude Include="..\src\ReplayEntitiesWindow.hpp" />
     <ClInclude Include="..\src\ReplayLogsWindow.hpp" />
     <ClInclude Include="..\src\ReplayData.hpp" />
+    <ClInclude Include="..\src\ReplayTimelineSlider.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

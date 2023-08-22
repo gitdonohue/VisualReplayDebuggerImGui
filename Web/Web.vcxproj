@@ -97,7 +97,9 @@
     <ClCompile Include="..\inflatecpp\huffman_decoder.cc" />
     <ClCompile Include="..\src\ReplayContext.cpp" />
     <ClCompile Include="..\src\ReplayData.cpp" />
+    <ClCompile Include="..\src\ReplayEntitiesWindow.cpp" />
     <ClCompile Include="..\src\ReplayLogsWindow.cpp" />
+    <ClCompile Include="..\src\ReplayTimelineSlider.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -116,7 +118,9 @@
     <ClInclude Include="..\inflatecpp\huffman_decoder.h" />
     <ClInclude Include="..\src\ReplayContext.hpp" />
     <ClInclude Include="..\src\ReplayData.hpp" />
+    <ClInclude Include="..\src\ReplayEntitiesWindow.hpp" />
     <ClInclude Include="..\src\ReplayLogsWindow.hpp" />
+    <ClInclude Include="..\src\ReplayTimelineSlider.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\docs\index.html" />

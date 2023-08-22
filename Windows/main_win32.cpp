@@ -28,6 +28,7 @@
 
 #include <ReplayLogsWindow.hpp>
 #include <ReplayEntitiesWindow.hpp>
+#include <ReplayTimelineSlider.hpp>
 
 static void glfw_error_callback(int error, const char* description)
 {
@@ -44,6 +45,7 @@ int main(int, char**)
 
     VisualReplayDebugger::ReplayLogsWindow logsWindow(replayContext);
     VisualReplayDebugger::ReplayEntitiesWindow entitiesWindow(replayContext);
+    VisualReplayDebugger::ReplayTimelineWindow timelineWindow(replayContext);
 
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit())
@@ -73,7 +75,7 @@ int main(int, char**)
 #endif
 
     // Create window with graphics context
-    GLFWwindow* window = glfwCreateWindow(1280, 720, "Visual Replay Debugger", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(3000, 1600, "Visual Replay Debugger", nullptr, nullptr);
     if (window == nullptr)
         return 1;
     glfwMakeContextCurrent(window);
@@ -93,6 +95,8 @@ int main(int, char**)
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
     //ImGui::StyleColorsLight();
+
+    //ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
 
     // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
     ImGuiStyle& style = ImGui::GetStyle();
@@ -115,13 +119,16 @@ int main(int, char**)
     // - Read 'docs/FONTS.md' for more instructions and details.
     // - Remember that in C/C++ if you want to include a backslash \ in a string literal you need to write a double backslash \\ !
     // - Our Emscripten build process allows embedding fonts to be accessible at runtime from the "fonts/" folder. See Makefile.emscripten for details.
-    //io.Fonts->AddFontDefault();
-    //io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\segoeui.ttf", 18.0f);
+    io.Fonts->AddFontDefault();
+    io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\segoeui.ttf", 24.0f);
+    io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\consola.ttf", 18.0f);
     //io.Fonts->AddFontFromFileTTF("../../misc/fonts/DroidSans.ttf", 16.0f);
     //io.Fonts->AddFontFromFileTTF("../../misc/fonts/Roboto-Medium.ttf", 16.0f);
     //io.Fonts->AddFontFromFileTTF("../../misc/fonts/Cousine-Regular.ttf", 15.0f);
     //ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());
     //IM_ASSERT(font != nullptr);
+
+    io.FontDefault = io.Fonts->Fonts[1];
 
     // Our state
     bool show_demo_window = true;
@@ -150,9 +157,31 @@ int main(int, char**)
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
+        ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
+
+        if (ImGui::BeginMainMenuBar())
+        {
+            if (ImGui::BeginMenu("File"))
+            {
+                //ShowExampleMenuFile();
+                ImGui::EndMenu();
+            }
+            if (ImGui::BeginMenu("Edit"))
+            {
+                if (ImGui::MenuItem("Undo", "CTRL+Z")) {}
+                if (ImGui::MenuItem("Redo", "CTRL+Y", false, false)) {}  // Disabled item
+                ImGui::Separator();
+                if (ImGui::MenuItem("Cut", "CTRL+X")) {}
+                if (ImGui::MenuItem("Copy", "CTRL+C")) {}
+                if (ImGui::MenuItem("Paste", "CTRL+V")) {}
+                ImGui::EndMenu();
+            }
+            ImGui::EndMainMenuBar();
+        }
+
         logsWindow.Draw();
-        
         entitiesWindow.Draw();
+        timelineWindow.Draw();
 
         // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
         if (show_demo_window)
