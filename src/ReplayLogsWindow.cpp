@@ -28,6 +28,20 @@ void ReplayLogsWindow::Draw()
 
     replayContext.hoveredLogEntry = nullptr;
 
+    bool frameChanged = false;
+    if (last_frame != replayContext.cursorFrame)
+    {
+        last_frame = replayContext.cursorFrame;
+        frameChanged = true;
+    }
+
+    bool roiChanged = false;
+    if (last_roi != replayContext.roi)
+    {
+        last_roi = replayContext.roi;
+        roiChanged = true;
+    }
+
     int firstLine = 0;
     for (const auto& entry : replayData.GetLogs())
     {
@@ -72,6 +86,9 @@ void ReplayLogsWindow::Draw()
         const ImGuiStyle& style = g.Style;
         const auto blockHeight = ImGui::GetTextLineHeight();// +(style.FramePadding.y * 2);
         ImDrawList& draw_list = *ImGui::GetWindowDrawList();
+
+        int line_count = 0;
+        int autoscroll_line = -1;
 
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
         {
@@ -122,16 +139,23 @@ void ReplayLogsWindow::Draw()
                         //ImColor col = col_active_frame;
                         //draw_list.AddRectFilledMultiColor(block_origin, block_bottom, col, col & 0x00FFFFFF, col & 0x00FFFFFF, col);
                     }
+
+                    ++line_count;
+                    if (entry.frame <= replayContext.cursorFrame)
+                    {
+                        autoscroll_line = line_count;
+                    }
                 }
             }
             clipper.End();
         }
         ImGui::PopStyleVar();
 
-        // Keep up at the bottom of the scroll region if we were already at the bottom at the beginning of the frame.
-        // Using a scrollbar or mouse-wheel will take away from the bottom edge.
-        //if (AutoScroll && ImGui::GetScrollY() >= ImGui::GetScrollMaxY())
-        //    ImGui::SetScrollHereY(1.0f);
+        // Auto-scroll
+        if (frameChanged)// && entry.frame == replayContext.cursorFrame)
+        {
+            ImGui::SetScrollFromPosY(autoscroll_line * blockHeight, 0.5f);
+        }
     }
     ImGui::EndChild();
     ImGui::End();

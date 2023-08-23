@@ -15,7 +15,15 @@ namespace VisualReplayDebugger
 	struct Point { float x=0, y=0, z=0; };
 	struct Quaternion { float x = 0, y = 0, z = 0, w = 1; };
 	struct Transform { Point translation; Quaternion rotation; };
-	struct FrameRange { int start = 0, end = -1; };
+
+	struct FrameRange
+	{
+		int start = 0;
+		int end = -1;
+
+		bool operator==(const FrameRange& other) const { return start == other.start && end == other.end; }
+	};
+	
 	struct TimeRange { float start = 0, end = -1; };
 
 	struct LogEntry

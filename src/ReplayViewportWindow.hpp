@@ -4,19 +4,20 @@
 
 #include <string>
 #include <vector>
+#include <mutil.h>
 
 namespace VisualReplayDebugger
 {
-	class ReplayLogsWindow
+	class ReplayViewportWindow
 	{
 	public:
-		ReplayLogsWindow(ReplayContext&);
+		ReplayViewportWindow(ReplayContext&);
 		void Draw();
 	private:
 		ReplayContext& replayContext;
 
-		std::vector<std::string> log_headers;
-		int last_frame = -1;
-		FrameRange last_roi = {};
+		mutil::Matrix4 view_matrix;
+		mutil::Matrix4 model_matrix;
+		mutil::Matrix4 projection_matrix;
 	};
 };

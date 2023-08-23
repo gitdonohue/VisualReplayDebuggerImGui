@@ -13,14 +13,23 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\inflatecpp">
-      <UniqueIdentifier>{a38a940d-bf7f-492a-8e5e-afed0353e5fd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\imgui">
       <UniqueIdentifier>{c860aa05-f5ae-4e81-a76f-e2599c047995}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\src">
       <UniqueIdentifier>{0d82af4c-0257-4d2f-9362-5746fe787fca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\MatrixUtil">
+      <UniqueIdentifier>{a2c0dfab-207a-4714-bb28-fed45ca87821}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\ImGuizmo">
+      <UniqueIdentifier>{aeb65b8d-ccb3-4745-8827-85fed9667bae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\GLFW">
+      <UniqueIdentifier>{87091b63-07cd-43aa-8b90-fa4b483552ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\src\inflatecpp">
+      <UniqueIdentifier>{a38a940d-bf7f-492a-8e5e-afed0353e5fd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -48,21 +57,6 @@
     <ClCompile Include="..\imgui\imgui_widgets.cpp">
       <Filter>Source Files\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="..\inflatecpp\adler32.cc">
-      <Filter>Source Files\inflatecpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\inflatecpp\bit_reader.cc">
-      <Filter>Source Files\inflatecpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\inflatecpp\crc32.cc">
-      <Filter>Source Files\inflatecpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\inflatecpp\decompressor.cc">
-      <Filter>Source Files\inflatecpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\inflatecpp\huffman_decoder.cc">
-      <Filter>Source Files\inflatecpp</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\ReplayContext.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
@@ -77,6 +71,27 @@
     </ClCompile>
     <ClCompile Include="..\src\ReplayTimelineSlider.cpp">
       <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ReplayViewportWindow.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ImGuizmo\ImGuizmo.cpp">
+      <Filter>Source Files\src\ImGuizmo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\inflatecpp\adler32.cc">
+      <Filter>Source Files\src\inflatecpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\inflatecpp\bit_reader.cc">
+      <Filter>Source Files\src\inflatecpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\inflatecpp\crc32.cc">
+      <Filter>Source Files\src\inflatecpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\inflatecpp\decompressor.cc">
+      <Filter>Source Files\src\inflatecpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\inflatecpp\huffman_decoder.cc">
+      <Filter>Source Files\src\inflatecpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,21 +119,6 @@
     <ClInclude Include="..\imgui\imstb_truetype.h">
       <Filter>Source Files\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="..\inflatecpp\adler32.h">
-      <Filter>Source Files\inflatecpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\inflatecpp\bit_reader.h">
-      <Filter>Source Files\inflatecpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\inflatecpp\crc32.h">
-      <Filter>Source Files\inflatecpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\inflatecpp\decompressor.h">
-      <Filter>Source Files\inflatecpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\inflatecpp\huffman_decoder.h">
-      <Filter>Source Files\inflatecpp</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\ReplayContext.hpp">
       <Filter>Source Files\src</Filter>
     </ClInclude>
@@ -134,5 +134,70 @@
     <ClInclude Include="..\src\ReplayTimelineSlider.hpp">
       <Filter>Source Files\src</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\ReplayViewportWindow.hpp">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ImGuizmo\ImGuizmo.h">
+      <Filter>Source Files\src\ImGuizmo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MatrixUtil\f_math.h">
+      <Filter>Source Files\src\MatrixUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MatrixUtil\fmat_math.h">
+      <Filter>Source Files\src\MatrixUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MatrixUtil\fmat_math_defs.h">
+      <Filter>Source Files\src\MatrixUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MatrixUtil\fmat_transform.h">
+      <Filter>Source Files\src\MatrixUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MatrixUtil\fvec_math.h">
+      <Filter>Source Files\src\MatrixUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MatrixUtil\ivec_math.h">
+      <Filter>Source Files\src\MatrixUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MatrixUtil\mat_types.h">
+      <Filter>Source Files\src\MatrixUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MatrixUtil\mutil.h">
+      <Filter>Source Files\src\MatrixUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MatrixUtil\quaternion.h">
+      <Filter>Source Files\src\MatrixUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MatrixUtil\settings.h">
+      <Filter>Source Files\src\MatrixUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MatrixUtil\vec_types.h">
+      <Filter>Source Files\src\MatrixUtil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GLFW\glfw3.h">
+      <Filter>Source Files\src\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\GLFW\glfw3native.h">
+      <Filter>Source Files\src\GLFW</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\inflatecpp\adler32.h">
+      <Filter>Source Files\src\inflatecpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\inflatecpp\bit_reader.h">
+      <Filter>Source Files\src\inflatecpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\inflatecpp\crc32.h">
+      <Filter>Source Files\src\inflatecpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\inflatecpp\decompressor.h">
+      <Filter>Source Files\src\inflatecpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\inflatecpp\huffman_decoder.h">
+      <Filter>Source Files\src\inflatecpp</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Natvis Include="..\src\MatrixUtil\matrixutil.natvis">
+      <Filter>Source Files\src\MatrixUtil</Filter>
+    </Natvis>
   </ItemGroup>
 </Project>

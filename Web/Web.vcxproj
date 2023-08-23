@@ -44,8 +44,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Emscripten'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..;$(ProjectDir)..\imgui\backends;$(ProjectDir)..\imgui</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>IMGUI_DISABLE_FILE_FUNCTIONS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..;$(ProjectDir)..\imgui\backends;$(ProjectDir)..\imgui;$(ProjectDir)..\src;$(ProjectDir)..\src\MatrixUtil</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IMGUI_DISABLE_FILE_FUNCTIONS;MUTIL_NO_INTRINSICS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -55,7 +55,7 @@
       <EnableMemoryGrowth>true</EnableMemoryGrowth>
       <EmBind>true</EmBind>
       <EchoCommandLines>true</EchoCommandLines>
-      <PreloadFile>../test/sample.vrd@/sample.vrd;</PreloadFile>
+      <PreloadFile>../sample.vrd@/sample.vrd;</PreloadFile>
     </Link>
     <ProjectReference />
     <ProjectReference>
@@ -64,8 +64,8 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Emscripten'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)..;$(ProjectDir)..\imgui\backends;$(ProjectDir)..\imgui</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>IMGUI_DISABLE_FILE_FUNCTIONS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)..;$(ProjectDir)..\imgui\backends;$(ProjectDir)..\imgui;$(ProjectDir)..\src;$(ProjectDir)..\src\MatrixUtil</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>IMGUI_DISABLE_FILE_FUNCTIONS;MUTIL_NO_INTRINSICS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -75,7 +75,7 @@
       <EnableMemoryGrowth>true</EnableMemoryGrowth>
       <EmBind>true</EmBind>
       <EchoCommandLines>true</EchoCommandLines>
-      <PreloadFile>../test/sample.vrd@/sample.vrd;</PreloadFile>
+      <PreloadFile>../sample.vrd@/sample.vrd;</PreloadFile>
     </Link>
     <ProjectReference />
     <ProjectReference>
@@ -90,16 +90,18 @@
     <ClCompile Include="..\imgui\imgui_draw.cpp" />
     <ClCompile Include="..\imgui\imgui_tables.cpp" />
     <ClCompile Include="..\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="..\inflatecpp\adler32.cc" />
-    <ClCompile Include="..\inflatecpp\bit_reader.cc" />
-    <ClCompile Include="..\inflatecpp\crc32.cc" />
-    <ClCompile Include="..\inflatecpp\decompressor.cc" />
-    <ClCompile Include="..\inflatecpp\huffman_decoder.cc" />
+    <ClCompile Include="..\src\ImGuizmo\ImGuizmo.cpp" />
+    <ClCompile Include="..\src\inflatecpp\adler32.cc" />
+    <ClCompile Include="..\src\inflatecpp\bit_reader.cc" />
+    <ClCompile Include="..\src\inflatecpp\crc32.cc" />
+    <ClCompile Include="..\src\inflatecpp\decompressor.cc" />
+    <ClCompile Include="..\src\inflatecpp\huffman_decoder.cc" />
     <ClCompile Include="..\src\ReplayContext.cpp" />
     <ClCompile Include="..\src\ReplayData.cpp" />
     <ClCompile Include="..\src\ReplayEntitiesWindow.cpp" />
     <ClCompile Include="..\src\ReplayLogsWindow.cpp" />
     <ClCompile Include="..\src\ReplayTimelineSlider.cpp" />
+    <ClCompile Include="..\src\ReplayViewportWindow.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -111,16 +113,18 @@
     <ClInclude Include="..\imgui\imstb_rectpack.h" />
     <ClInclude Include="..\imgui\imstb_textedit.h" />
     <ClInclude Include="..\imgui\imstb_truetype.h" />
-    <ClInclude Include="..\inflatecpp\adler32.h" />
-    <ClInclude Include="..\inflatecpp\bit_reader.h" />
-    <ClInclude Include="..\inflatecpp\crc32.h" />
-    <ClInclude Include="..\inflatecpp\decompressor.h" />
-    <ClInclude Include="..\inflatecpp\huffman_decoder.h" />
+    <ClInclude Include="..\src\ImGuizmo\ImGuizmo.h" />
+    <ClInclude Include="..\src\inflatecpp\adler32.h" />
+    <ClInclude Include="..\src\inflatecpp\bit_reader.h" />
+    <ClInclude Include="..\src\inflatecpp\crc32.h" />
+    <ClInclude Include="..\src\inflatecpp\decompressor.h" />
+    <ClInclude Include="..\src\inflatecpp\huffman_decoder.h" />
     <ClInclude Include="..\src\ReplayContext.hpp" />
     <ClInclude Include="..\src\ReplayData.hpp" />
     <ClInclude Include="..\src\ReplayEntitiesWindow.hpp" />
     <ClInclude Include="..\src\ReplayLogsWindow.hpp" />
     <ClInclude Include="..\src\ReplayTimelineSlider.hpp" />
+    <ClInclude Include="..\src\ReplayViewportWindow.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\docs\index.html" />

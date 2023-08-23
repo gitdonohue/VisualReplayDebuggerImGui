@@ -28,6 +28,7 @@
 #include <src/ReplayLogsWindow.hpp>
 #include <src/ReplayEntitiesWindow.hpp>
 #include <src/ReplayTimelineSlider.hpp>
+#include <src/ReplayViewportWindow.hpp>
 
 // Global WebGPU required states
 static WGPUDevice    wgpu_device = nullptr;
@@ -51,6 +52,7 @@ static VisualReplayDebugger::ReplayContext* s_pReplayContext = nullptr;
 static VisualReplayDebugger::ReplayLogsWindow* s_pLogsWindow = nullptr;
 static VisualReplayDebugger::ReplayEntitiesWindow* s_entitiesWindow = nullptr;
 static VisualReplayDebugger::ReplayTimelineWindow* s_timelineWindow = nullptr;
+static VisualReplayDebugger::ReplayViewportWindow* s_viewport = nullptr;
 
 // Main code
 int main(int, char**)
@@ -61,6 +63,7 @@ int main(int, char**)
     s_pLogsWindow = new VisualReplayDebugger::ReplayLogsWindow(*s_pReplayContext);
     s_entitiesWindow = new VisualReplayDebugger::ReplayEntitiesWindow(*s_pReplayContext);
     s_timelineWindow = new VisualReplayDebugger::ReplayTimelineWindow(*s_pReplayContext);
+    s_viewport = new VisualReplayDebugger::ReplayViewportWindow(*s_pReplayContext);
 
     glfwSetErrorCallback(print_glfw_error);
     if (!glfwInit())
@@ -245,6 +248,7 @@ static void MainLoopStep(void* window)
     s_timelineWindow->Draw();
     s_entitiesWindow->Draw();
     s_pLogsWindow->Draw();
+    s_viewport->Draw();
 
     // Rendering
     ImGui::Render();

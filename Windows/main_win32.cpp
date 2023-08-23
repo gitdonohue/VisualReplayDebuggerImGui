@@ -29,6 +29,7 @@
 #include <ReplayLogsWindow.hpp>
 #include <ReplayEntitiesWindow.hpp>
 #include <ReplayTimelineSlider.hpp>
+#include <ReplayViewportWindow.hpp>
 
 static void glfw_error_callback(int error, const char* description)
 {
@@ -39,13 +40,14 @@ static void glfw_error_callback(int error, const char* description)
 int main(int, char**)
 {
     VisualReplayDebugger::ReplayData replayData;
-    std::ifstream ifs("../test/sample.vrd", std::ifstream::in | std::ifstream::app | std::ifstream::binary);
+    std::ifstream ifs("../sample.vrd", std::ifstream::in | std::ifstream::app | std::ifstream::binary);
     replayData.Read(ifs);
     VisualReplayDebugger::ReplayContext replayContext(replayData);
 
     VisualReplayDebugger::ReplayLogsWindow logsWindow(replayContext);
     VisualReplayDebugger::ReplayEntitiesWindow entitiesWindow(replayContext);
     VisualReplayDebugger::ReplayTimelineWindow timelineWindow(replayContext);
+    VisualReplayDebugger::ReplayViewportWindow viewport(replayContext);
 
     glfwSetErrorCallback(glfw_error_callback);
     if (!glfwInit())
@@ -182,6 +184,7 @@ int main(int, char**)
         logsWindow.Draw();
         entitiesWindow.Draw();
         timelineWindow.Draw();
+        viewport.Draw();
 
         // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
         if (show_demo_window)

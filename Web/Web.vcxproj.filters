@@ -32,26 +32,32 @@
     <ClCompile Include="..\src\ReplayLogsWindow.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\inflatecpp\adler32.cc">
-      <Filter>inflatecpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\inflatecpp\bit_reader.cc">
-      <Filter>inflatecpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\inflatecpp\crc32.cc">
-      <Filter>inflatecpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\inflatecpp\decompressor.cc">
-      <Filter>inflatecpp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\inflatecpp\huffman_decoder.cc">
-      <Filter>inflatecpp</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\ReplayEntitiesWindow.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\ReplayTimelineSlider.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\inflatecpp\adler32.cc">
+      <Filter>src\inflatecpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\inflatecpp\bit_reader.cc">
+      <Filter>src\inflatecpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\inflatecpp\crc32.cc">
+      <Filter>src\inflatecpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\inflatecpp\decompressor.cc">
+      <Filter>src\inflatecpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\inflatecpp\huffman_decoder.cc">
+      <Filter>src\inflatecpp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ReplayViewportWindow.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ImGuizmo\ImGuizmo.cpp">
+      <Filter>src\imguizmo</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -88,26 +94,32 @@
     <ClInclude Include="..\src\ReplayLogsWindow.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\inflatecpp\adler32.h">
-      <Filter>inflatecpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\inflatecpp\bit_reader.h">
-      <Filter>inflatecpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\inflatecpp\crc32.h">
-      <Filter>inflatecpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\inflatecpp\decompressor.h">
-      <Filter>inflatecpp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\inflatecpp\huffman_decoder.h">
-      <Filter>inflatecpp</Filter>
-    </ClInclude>
     <ClInclude Include="..\src\ReplayEntitiesWindow.hpp">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\ReplayTimelineSlider.hpp">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\inflatecpp\adler32.h">
+      <Filter>src\inflatecpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\inflatecpp\bit_reader.h">
+      <Filter>src\inflatecpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\inflatecpp\crc32.h">
+      <Filter>src\inflatecpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\inflatecpp\decompressor.h">
+      <Filter>src\inflatecpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\inflatecpp\huffman_decoder.h">
+      <Filter>src\inflatecpp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ReplayViewportWindow.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ImGuizmo\ImGuizmo.h">
+      <Filter>src\imguizmo</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -120,8 +132,11 @@
     <Filter Include="src">
       <UniqueIdentifier>{daf46d79-3eaa-4f18-9535-7ee73c372f3f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="inflatecpp">
+    <Filter Include="src\inflatecpp">
       <UniqueIdentifier>{3674d9a0-e516-4a88-ae0c-8d662f6b0cfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\imguizmo">
+      <UniqueIdentifier>{ffbc23f5-8cc5-4dfe-97b9-23813680828a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
