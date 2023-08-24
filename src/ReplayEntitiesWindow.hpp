@@ -1,20 +1,19 @@
 #pragma once
 
-#include "ReplayContext.hpp"
+#include "ReplayWidgetBase.hpp"
 
 #include <string>
 #include <vector>
 
 namespace VisualReplayDebugger
 {
-	class ReplayEntitiesWindow
+	class ReplayEntitiesWindow : public ReplayWidgetBase
 	{
 	public:
-		ReplayEntitiesWindow(ReplayContext&);
-		void Draw();
+		inline ReplayEntitiesWindow(ReplayContext& ctx) : ReplayWidgetBase(ctx) {}
+		inline void DataChanged() override {}
+		void DrawImpl() override;
 	private:
-		ReplayContext& replayContext;
-
 		std::vector<std::string> log_headers;
 	};
 };

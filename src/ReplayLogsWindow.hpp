@@ -1,20 +1,19 @@
 #pragma once
 
-#include "ReplayContext.hpp"
+#include "ReplayWidgetBase.hpp"
 
 #include <string>
 #include <vector>
 
 namespace VisualReplayDebugger
 {
-	class ReplayLogsWindow
+	class ReplayLogsWindow : public ReplayWidgetBase
 	{
 	public:
-		ReplayLogsWindow(ReplayContext&);
-		void Draw();
+		inline ReplayLogsWindow(ReplayContext& ctx) : ReplayWidgetBase(ctx) {};
+		void DataChanged() override;
+		void DrawImpl() override;
 	private:
-		ReplayContext& replayContext;
-
 		std::vector<std::string> log_headers;
 		int last_frame = -1;
 		FrameRange last_roi = {};

@@ -48,7 +48,7 @@ EM_JS(int, canvas_get_height, (), { return Module.canvas.height; });
 EM_JS(void, resizeCanvas, (), { js_resizeCanvas(); });
 
 static VisualReplayDebugger::ReplayData s_replayData;
-static VisualReplayDebugger::ReplayContext* s_pReplayContext = nullptr;
+static VisualReplayDebugger::ReplayContext s_pReplayContext;
 static VisualReplayDebugger::ReplayLogsWindow* s_pLogsWindow = nullptr;
 static VisualReplayDebugger::ReplayEntitiesWindow* s_entitiesWindow = nullptr;
 static VisualReplayDebugger::ReplayTimelineWindow* s_timelineWindow = nullptr;
@@ -59,11 +59,11 @@ int main(int, char**)
 {
     std::ifstream ifs("sample.vrd", std::ifstream::in | std::ifstream::app | std::ifstream::binary);
     s_replayData.Read(ifs);
-    s_pReplayContext = new VisualReplayDebugger::ReplayContext(s_replayData);
-    s_pLogsWindow = new VisualReplayDebugger::ReplayLogsWindow(*s_pReplayContext);
-    s_entitiesWindow = new VisualReplayDebugger::ReplayEntitiesWindow(*s_pReplayContext);
-    s_timelineWindow = new VisualReplayDebugger::ReplayTimelineWindow(*s_pReplayContext);
-    s_viewport = new VisualReplayDebugger::ReplayViewportWindow(*s_pReplayContext);
+    s_pReplayContext.SetData(s_replayData);
+    s_pLogsWindow = new VisualReplayDebugger::ReplayLogsWindow(s_pReplayContext);
+    s_entitiesWindow = new VisualReplayDebugger::ReplayEntitiesWindow(s_pReplayContext);
+    s_timelineWindow = new VisualReplayDebugger::ReplayTimelineWindow(s_pReplayContext);
+    s_viewport = new VisualReplayDebugger::ReplayViewportWindow(s_pReplayContext);
 
     glfwSetErrorCallback(print_glfw_error);
     if (!glfwInit())

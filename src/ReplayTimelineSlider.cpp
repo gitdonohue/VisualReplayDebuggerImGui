@@ -8,13 +8,8 @@
 
 using namespace VisualReplayDebugger;
 
-ReplayTimelineSlider::ReplayTimelineSlider(ReplayContext& ctx)
-    : replayContext(ctx)
-{
 
-}
-
-void ReplayTimelineSlider::Draw()
+void ReplayTimelineSlider::DrawImpl()
 {
     ImGui::PushItemWidth(-FLT_MIN);
     ImGui::SliderInt("Frame", &replayContext.cursorFrame, 0, replayContext.GetReplayData().FrameCount(), "frame = %d", ImGuiSliderFlags_AlwaysClamp);
@@ -33,13 +28,8 @@ void ReplayTimelineSlider::Draw()
 // 
 //
 
-ReplayTimelineWindow::ReplayTimelineWindow(ReplayContext& ctx)
-    : replayContext(ctx), slider(ctx)
-{
 
-}
-
-void ReplayTimelineWindow::Draw()
+void ReplayTimelineWindow::DrawImpl()
 {
     if (!ImGui::Begin("ReplayTimelineWindow"))
     {

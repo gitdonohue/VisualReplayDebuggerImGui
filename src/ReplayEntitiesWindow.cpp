@@ -7,13 +7,8 @@
 
 using namespace VisualReplayDebugger;
 
-ReplayEntitiesWindow::ReplayEntitiesWindow(ReplayContext& ctx)
-    : replayContext(ctx)
-{
 
-}
-
-void ReplayEntitiesWindow::Draw()
+void ReplayEntitiesWindow::DrawImpl()
 {
     const auto& replayData = replayContext.GetReplayData();
 

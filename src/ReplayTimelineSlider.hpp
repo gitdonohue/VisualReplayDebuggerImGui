@@ -1,29 +1,26 @@
 #pragma once
 
-#include "ReplayContext.hpp"
-
-#include <string>
-#include <vector>
+#include "ReplayWidgetBase.hpp"
 
 namespace VisualReplayDebugger
 {
-	class ReplayTimelineSlider
+	class ReplayTimelineSlider : public ReplayWidgetBase
 	{
 	public:
-		ReplayTimelineSlider(ReplayContext&);
-		void Draw();
-	private:
-		ReplayContext& replayContext;
+		inline ReplayTimelineSlider(ReplayContext& ctx) : ReplayWidgetBase(ctx) {};
+
+		inline void DataChanged() override {}
+		void DrawImpl() override;
 	};
 
-	class ReplayTimelineWindow
+	class ReplayTimelineWindow : public ReplayWidgetBase
 	{
 	public:
-		ReplayTimelineWindow(ReplayContext&);
-		void Draw();
-	private:
-		ReplayContext& replayContext;
+		inline ReplayTimelineWindow(ReplayContext& ctx) : ReplayWidgetBase(ctx), slider(ctx) {};
 
+		inline void DataChanged() override {}
+		void DrawImpl() override;
+	private:
 		ReplayTimelineSlider slider;
 	};
 };

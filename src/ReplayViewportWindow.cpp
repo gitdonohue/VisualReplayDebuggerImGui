@@ -6,13 +6,11 @@
 
 #include "ImGuizmo\ImGuizmo.h"
 
-
-
 using namespace VisualReplayDebugger;
 using namespace mutil;
 
-ReplayViewportWindow::ReplayViewportWindow(ReplayContext& ctx)
-    : replayContext(ctx)
+
+void ReplayViewportWindow::DataChanged()
 {
     Vector3 eye(1, -1, 1);
     Vector3 target(0, 0, 0);
@@ -20,10 +18,9 @@ ReplayViewportWindow::ReplayViewportWindow(ReplayContext& ctx)
     //Matrix4 model_matrix; // identity
     view_matrix = mutil::lookAt(eye, target, up);
     projection_matrix = mutil::ortho(-1, 1, -1, 1, 0.01f, 100.0f);
-
 }
 
-void ReplayViewportWindow::Draw()
+void ReplayViewportWindow::DrawImpl()
 {
     if (!ImGui::Begin("ReplayViewportWindow"))
     {

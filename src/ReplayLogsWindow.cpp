@@ -8,8 +8,8 @@
 
 using namespace VisualReplayDebugger;
 
-ReplayLogsWindow::ReplayLogsWindow(ReplayContext& ctx)
-    : replayContext(ctx)
+
+void ReplayLogsWindow::DataChanged()
 {
     // Pre-build log headers
     log_headers.reserve(replayContext.GetReplayData().LogCount());
@@ -21,7 +21,7 @@ ReplayLogsWindow::ReplayLogsWindow(ReplayContext& ctx)
     }
 }
 
-void ReplayLogsWindow::Draw()
+void ReplayLogsWindow::DrawImpl()
 {
     auto& g = *GImGui;
     const auto& replayData = replayContext.GetReplayData();

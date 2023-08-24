@@ -2,25 +2,35 @@
 
 #include "ReplayData.hpp"
 
+#include <set>
+
 namespace VisualReplayDebugger
 {
+	struct Entity;
 	struct LogEntry;
 
 	// Replay context holds the global time cursor and window.
 	class ReplayContext
 	{
 	public:
-		ReplayContext(const ReplayData& replayData);
+		ReplayContext();
+		ReplayContext(const ReplayData&);
 		
-		inline const ReplayData& GetReplayData() { return replayData; }
+		void SetData(const ReplayData&);
+		void Reset();
+		inline const ReplayData& GetReplayData() const { return *replayData; }
 
 	private:
-		const ReplayData& replayData;
+		ReplayData const* replayData;
+		ReplayData _dummyReplayData;
 
 	public:
 		int cursorFrame = 0;
 		FrameRange roi;
 
-		const LogEntry* hoveredLogEntry;
+		const LogEntry* hoveredLogEntry = nullptr;
+		std::set<Entity*> selectedEntities;
+
+		int dataGen = 0;
 	};
 };

@@ -1,20 +1,19 @@
 #pragma once
 
-#include "ReplayContext.hpp"
+#include "ReplayWidgetBase.hpp"
 
-#include <string>
-#include <vector>
 #include <mutil.h>
 
 namespace VisualReplayDebugger
 {
-	class ReplayViewportWindow
+	class ReplayViewportWindow : public ReplayWidgetBase
 	{
 	public:
-		ReplayViewportWindow(ReplayContext&);
-		void Draw();
+		inline ReplayViewportWindow(ReplayContext& ctx) : ReplayWidgetBase(ctx) {};
+		
+		void DataChanged() override;
+		void DrawImpl() override;
 	private:
-		ReplayContext& replayContext;
 
 		mutil::Matrix4 view_matrix;
 		mutil::Matrix4 model_matrix;
