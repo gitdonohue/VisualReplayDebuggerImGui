@@ -45,7 +45,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Emscripten'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(ProjectDir)..;$(ProjectDir)..\imgui\backends;$(ProjectDir)..\imgui;$(ProjectDir)..\src;$(ProjectDir)..\src\MatrixUtil</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>IMGUI_DISABLE_FILE_FUNCTIONS;MUTIL_NO_INTRINSICS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>MUTIL_NO_INTRINSICS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
@@ -55,7 +55,7 @@
       <EnableMemoryGrowth>true</EnableMemoryGrowth>
       <EmBind>true</EmBind>
       <EchoCommandLines>true</EchoCommandLines>
-      <PreloadFile>../sample.vrd@/sample.vrd;../imgui.ini@/imgui.ini;</PreloadFile>
+      <PreloadFile>../sample.vrd@/sample.vrd;../imgui.ini@/imgui.ini;../FiraCode-Regular.ttf@/FiraCode-Regular.ttf;</PreloadFile>
     </Link>
     <ProjectReference />
     <ProjectReference>

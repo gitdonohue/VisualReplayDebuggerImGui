@@ -219,5 +219,8 @@
     <CopyFileToFolders Include="..\imgui.ini">
       <Filter>Resource Files</Filter>
     </CopyFileToFolders>
+    <CopyFileToFolders Include="..\FiraCode-Regular.ttf">
+      <Filter>Resource Files</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>

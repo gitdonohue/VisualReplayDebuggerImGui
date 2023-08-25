@@ -189,7 +189,7 @@ var REMOTE_PACKAGE_SIZE = metadata['remote_package_size'];
     }
 
     }
-    loadPackage({"files": [{"filename": "/imgui.ini", "start": 0, "end": 1571}, {"filename": "/sample.vrd", "start": 1571, "end": 320276}], "remote_package_size": 320276});
+    loadPackage({"files": [{"filename": "/FiraCode-Regular.ttf", "start": 0, "end": 289624}, {"filename": "/imgui.ini", "start": 289624, "end": 291195}, {"filename": "/sample.vrd", "start": 291195, "end": 609900}], "remote_package_size": 609900});
 
   })();
 
@@ -9494,6 +9494,7 @@ var wasmImports = {
 };
 var asm = createWasm();
 var ___wasm_call_ctors = createExportWrapper('__wasm_call_ctors');
+var _fflush = Module['_fflush'] = createExportWrapper('fflush');
 var _malloc = createExportWrapper('malloc');
 var _free = createExportWrapper('free');
 var _main = Module['_main'] = createExportWrapper('__main_argc_argv');
@@ -9501,7 +9502,6 @@ var ___getTypeName = createExportWrapper('__getTypeName');
 var __embind_initialize_bindings = Module['__embind_initialize_bindings'] = createExportWrapper('_embind_initialize_bindings');
 var ___errno_location = createExportWrapper('__errno_location');
 var ___funcs_on_exit = createExportWrapper('__funcs_on_exit');
-var _fflush = Module['_fflush'] = createExportWrapper('fflush');
 var _memalign = createExportWrapper('memalign');
 var setTempRet0 = createExportWrapper('setTempRet0');
 var _emscripten_stack_init = () => (_emscripten_stack_init = wasmExports['emscripten_stack_init'])();
@@ -9518,8 +9518,8 @@ var dynCall_viijii = Module['dynCall_viijii'] = createExportWrapper('dynCall_vii
 var dynCall_iiiiij = Module['dynCall_iiiiij'] = createExportWrapper('dynCall_iiiiij');
 var dynCall_iiiiijj = Module['dynCall_iiiiijj'] = createExportWrapper('dynCall_iiiiijj');
 var dynCall_iiiiiijj = Module['dynCall_iiiiiijj'] = createExportWrapper('dynCall_iiiiiijj');
-var ___start_em_js = Module['___start_em_js'] = 248444;
-var ___stop_em_js = Module['___stop_em_js'] = 248550;
+var ___start_em_js = Module['___start_em_js'] = 248508;
+var ___stop_em_js = Module['___stop_em_js'] = 248614;
 
 // include: postamble.js
 // === Auto-generated postamble setup entry stuff ===
