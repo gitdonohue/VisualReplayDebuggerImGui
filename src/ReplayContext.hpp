@@ -29,7 +29,7 @@ namespace VisualReplayDebugger
 		FrameRange roi;
 
 		const LogEntry* hoveredLogEntry = nullptr;
-		std::set<Entity*> selectedEntities;
+		std::set<const Entity*> selectedEntities;
 
 		int dataGen = 0;
 	};

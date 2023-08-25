@@ -189,7 +189,7 @@ var REMOTE_PACKAGE_SIZE = metadata['remote_package_size'];
     }
 
     }
-    loadPackage({"files": [{"filename": "/FiraCode-Regular.ttf", "start": 0, "end": 289624}, {"filename": "/imgui.ini", "start": 289624, "end": 291195}, {"filename": "/sample.vrd", "start": 291195, "end": 609900}], "remote_package_size": 609900});
+    loadPackage({"files": [{"filename": "/FiraCode-Regular.ttf", "start": 0, "end": 289624}, {"filename": "/imgui.ini", "start": 289624, "end": 291278}, {"filename": "/sample.vrd", "start": 291278, "end": 609983}], "remote_package_size": 609983});
 
   })();
 
@@ -9518,8 +9518,8 @@ var dynCall_viijii = Module['dynCall_viijii'] = createExportWrapper('dynCall_vii
 var dynCall_iiiiij = Module['dynCall_iiiiij'] = createExportWrapper('dynCall_iiiiij');
 var dynCall_iiiiijj = Module['dynCall_iiiiijj'] = createExportWrapper('dynCall_iiiiijj');
 var dynCall_iiiiiijj = Module['dynCall_iiiiiijj'] = createExportWrapper('dynCall_iiiiiijj');
-var ___start_em_js = Module['___start_em_js'] = 248508;
-var ___stop_em_js = Module['___stop_em_js'] = 248614;
+var ___start_em_js = Module['___start_em_js'] = 248652;
+var ___stop_em_js = Module['___stop_em_js'] = 248758;
 
 // include: postamble.js
 // === Auto-generated postamble setup entry stuff ===

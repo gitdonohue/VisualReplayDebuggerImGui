@@ -43,9 +43,9 @@ void ReplayEntitiesWindow::DrawImpl()
         float blockWidth = windowWidth - margin;
         ImVec2 block_size = ImVec2(blockWidth, blockHeight);
 
-        for (const auto& entity_entry : replayData.GetEntities())
+        for (const Entity* entityPtr : replayData.GetEntities())
         {
-            const Entity& entity = entity_entry.second;
+            const Entity& entity = *entityPtr;
             if (entity.Id < 0) continue;
 
             const float ratio_start = replayData.GetTimeForFrame(entity.CreationFrame) / totalTime;
@@ -54,7 +54,27 @@ void ReplayEntitiesWindow::DrawImpl()
             ImVec2 block_origin = ImGui::GetCursorScreenPos();
             block_origin.x += margin;
 
-            ImGui::TextUnformatted(entity.Name.c_str());
+            //ImGui::TextUnformatted(entity.Name.c_str());
+
+            bool wasSelected = replayContext.selectedEntities.contains(&entity);
+            bool isSelected = wasSelected;
+            ImGui::Selectable(entity.Name.c_str(), &isSelected);
+            if (isSelected != wasSelected)
+            {
+                if (!ImGui::GetIO().KeyCtrl)
+                {
+                    replayContext.selectedEntities.clear();
+                }
+
+                if (isSelected)
+                {
+                    replayContext.selectedEntities.insert(&entity);
+                }
+                else
+                {
+                    replayContext.selectedEntities.erase(&entity);
+                }
+            }
 
             ImVec2 p1 = ImVec2(block_origin.x + block_size.x, block_origin.y + block_size.y);
             draw_list.AddRectFilledMultiColor(block_origin, p1, col_bg, col_bg, col_bg_bottom, col_bg_bottom);

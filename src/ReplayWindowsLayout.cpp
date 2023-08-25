@@ -8,7 +8,8 @@ ReplayWindowsLayout::ReplayWindowsLayout(ReplayContext& ctx)
 	entitiesWindow(ctx),
 	timelineWindow(ctx),
 	viewport(ctx),
-	graphWindow(ctx)
+	graphWindow(ctx),
+	propertiesWindow(ctx)
 {
 
 }
@@ -20,4 +21,5 @@ void ReplayWindowsLayout::DrawImpl()
 	logsWindow.Draw();
 	graphWindow.Draw();
 	viewport.Draw();
+	propertiesWindow.Draw();
 }

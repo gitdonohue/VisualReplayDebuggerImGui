@@ -99,6 +99,9 @@
     <ClCompile Include="..\src\ReplayWindowsLayout.cpp">
       <Filter>Source Files\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\ReplayPropertiesWindow.cpp">
+      <Filter>Source Files\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\imgui\imconfig.h">
@@ -207,6 +210,9 @@
       <Filter>Source Files\src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\ReplayWindowsLayout.hpp">
+      <Filter>Source Files\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ReplayPropertiesWindow.hpp">
       <Filter>Source Files\src</Filter>
     </ClInclude>
   </ItemGroup>

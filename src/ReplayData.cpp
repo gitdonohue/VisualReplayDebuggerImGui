@@ -37,6 +37,8 @@ enum BlockType
 	EntityMesh,
 	EntityBox,
 
+	Count,
+
 	ReplayHeader = 0xFF
 };
 
@@ -316,7 +318,7 @@ void ReplayData::ReadInternal(std::istream& input)
 			frametimes.push_back(totalTime);
 			if (abs(totalTime) > framesForTimes.size()) { framesForTimes.push_back((int)frametimes.size()); }
 		}
-		else
+		else if (blockType < BlockType::Count && blockType > 0)
 		{
 			const int frame = Read7BitEncodedInt(input);
 			const int id = Read7BitEncodedInt(input);
@@ -324,11 +326,11 @@ void ReplayData::ReadInternal(std::istream& input)
 			{
 				const Entity entitydef = ReadEntity(input);
 
-				const auto previouslyDefinedEntityElement = entities.find(entitydef.Id);
-				if (previouslyDefinedEntityElement != entities.end())
+				const auto previouslyDefinedEntityElement = entities_map.find(entitydef.Id);
+				if (previouslyDefinedEntityElement != entities_map.end())
 				{
 					// Overrides
-					Entity& previouslyDefinedEntity = previouslyDefinedEntityElement->second;
+					Entity& previouslyDefinedEntity = *(const_cast<Entity*>(previouslyDefinedEntityElement->second));
 					previouslyDefinedEntity.Name = entitydef.Name;
 					previouslyDefinedEntity.Path = entitydef.Path;
 					previouslyDefinedEntity.CategoryName = entitydef.CategoryName;
@@ -339,12 +341,15 @@ void ReplayData::ReadInternal(std::istream& input)
 				}
 				else
 				{
-					entities[entitydef.Id] = entitydef;
+					entities.push_back(entitydef);
+					const Entity* entity_Ref = &entities.back();
+					entities_refs.push_back(entity_Ref);
+					entities_map[entitydef.Id] = entity_Ref;
 				}
 				entityCategories.insert(entitydef.CategoryName);
 			}
 
-			Entity& entity = (id > 0) ? entities[id - 1] : entities[0];
+			Entity& entity = GetEntityRef(id);
 
 			switch (blockType)
 			{
@@ -397,10 +402,10 @@ void ReplayData::ReadInternal(std::istream& input)
 			break;
 			case BlockType::EntityParameter:
 			{
-				std::string label = ReadString(input);
-				std::string val = ReadString(input);
+				const std::string label = ReadString(input);
+				const std::string val = ReadString(input);
 				entity.HasParameters = true;
-				//AddToDynamicPropertiesTable(entity, frame, label, val);
+				entity.AddDynamicProperty(label, val, frame);
 			}
 			break;
 			case BlockType::EntityValue:
@@ -408,7 +413,7 @@ void ReplayData::ReadInternal(std::istream& input)
 				const std::string label = ReadString(input);
 				const float val = ReadValue<float>(input);
 				entity.HasNumericParameters = true;
-				//EntityDynamicValues.For(entity) ? .AddForBake(frame, (label, val));
+				entity.AddDynamicValue(label, val, frame);
 			}
 			break;
 			case BlockType::EntityLine:

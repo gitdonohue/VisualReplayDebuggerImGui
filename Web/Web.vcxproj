@@ -101,6 +101,7 @@
     <ClCompile Include="..\src\ReplayEntitiesWindow.cpp" />
     <ClCompile Include="..\src\ReplayGraphWindow.cpp" />
     <ClCompile Include="..\src\ReplayLogsWindow.cpp" />
+    <ClCompile Include="..\src\ReplayPropertiesWindow.cpp" />
     <ClCompile Include="..\src\ReplayTimelineSlider.cpp" />
     <ClCompile Include="..\src\ReplayViewportWindow.cpp" />
     <ClCompile Include="..\src\ReplayWindowsLayout.cpp" />
@@ -126,6 +127,7 @@
     <ClInclude Include="..\src\ReplayEntitiesWindow.hpp" />
     <ClInclude Include="..\src\ReplayGraphWindow.hpp" />
     <ClInclude Include="..\src\ReplayLogsWindow.hpp" />
+    <ClInclude Include="..\src\ReplayPropertiesWindow.hpp" />
     <ClInclude Include="..\src\ReplayTimelineSlider.hpp" />
     <ClInclude Include="..\src\ReplayViewportWindow.hpp" />
     <ClInclude Include="..\src\ReplayWidgetBase.hpp" />

@@ -65,6 +65,9 @@
     <ClCompile Include="..\src\ReplayWindowsLayout.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\ReplayPropertiesWindow.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\imgui\imstb_truetype.h">
@@ -134,6 +137,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\src\ReplayWindowsLayout.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ReplayPropertiesWindow.hpp">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

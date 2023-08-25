@@ -6,6 +6,7 @@
 #include <vector>
 #include <map>
 #include <set>
+#include <algorithm>
 
 namespace VisualReplayDebugger
 {
@@ -37,6 +38,24 @@ namespace VisualReplayDebugger
 		Color color;
 	};
 
+	template <typename T> class TimeStampedList 
+		: public std::list<std::pair<int, T>>
+	{
+		T defaultVal = {};
+	public:
+		inline const T& AtFrame(int frame) const 
+		{
+			if (this->size() < 1) return defaultVal;
+			const T* last_value = &this->front().second;
+			for (const auto& p : *this)
+			{
+				if (p.first > frame) break;
+				last_value = &p.second;
+			}
+			return *last_value;
+		}
+	};
+
 	struct Entity
 	{
 		int Id = -1;
@@ -59,6 +78,22 @@ namespace VisualReplayDebugger
 		bool HasNumericParameters = false;
 
 		std::vector<LogEntry*> Logs;
+
+		std::map<std::string, TimeStampedList<std::string>> DynamicProperties;
+		std::map<std::string, TimeStampedList<float>> DynamicValues;
+
+	protected:
+		inline void AddDynamicProperty(const std::string& label, const std::string& value, int frame) 
+		{
+			DynamicProperties[label].push_back(std::make_pair(frame,value));
+		}
+
+		inline void AddDynamicValue(const std::string& label, const float& value, int frame)
+		{
+			DynamicValues[label].push_back(std::make_pair(frame, value));
+		}
+
+		friend class ReplayData;
 	};
 
 	class ReplayData
@@ -67,7 +102,8 @@ namespace VisualReplayDebugger
 	public:
 		void Read(std::istream& input);
 
-		inline const std::map<int, Entity> GetEntities() const { return entities; }
+		inline const std::list<const Entity*> GetEntities() const { return entities_refs; }
+		inline const Entity* GetEntity(int id) const { return entities_map.at(id); }
 
 		inline int LogCount() const { return (int)logs.size(); }
 		inline const LogEntry& GetLogEntry(int index) const { return logs.at(index); }
@@ -79,13 +115,16 @@ namespace VisualReplayDebugger
 
 	private:
 		void ReadInternal(std::istream& input);
+		inline Entity& GetEntityRef(int id) { return *(const_cast<Entity*>(entities_map.at(id))); }
 
 	private:
 		std::vector<float> frametimes;
 		std::list<int> framesForTimes;
 		std::map<int, FrameRange> entityLifetimes;
 
-		std::map<int, Entity> entities;
+		std::list<Entity> entities;
+		std::list<const Entity*> entities_refs;
+		std::map<int, const Entity*> entities_map;
 		std::set<std::string> entityCategories;
 
 		std::vector<LogEntry> logs;

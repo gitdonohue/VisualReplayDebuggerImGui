@@ -6,6 +6,7 @@
 #include <ReplayTimelineSlider.hpp>
 #include <ReplayViewportWindow.hpp>
 #include <ReplayGraphWindow.hpp>
+#include <ReplayPropertiesWindow.hpp>
 
 namespace VisualReplayDebugger
 {
@@ -23,5 +24,6 @@ namespace VisualReplayDebugger
 		VisualReplayDebugger::ReplayTimelineWindow timelineWindow;
 		VisualReplayDebugger::ReplayViewportWindow viewport;
 		VisualReplayDebugger::ReplayGraphWindow graphWindow;
+		VisualReplayDebugger::ReplayPropertiesWindow propertiesWindow;
 	};
 }

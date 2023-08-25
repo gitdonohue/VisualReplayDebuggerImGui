@@ -19,4 +19,11 @@ void ReplayContext::Reset()
 	roi.end = replayData->FrameCount();
 	hoveredLogEntry = nullptr;
 	selectedEntities.clear();
+
+	// test: select first entry
+	if (replayData->GetEntities().size() > 0)
+	{
+		const Entity* entry = replayData->GetEntity(1);
+		selectedEntities.insert(entry);
+	}
 }
