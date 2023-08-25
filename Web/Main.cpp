@@ -17,10 +17,6 @@
 
 #include <src/ReplayData.hpp>
 #include <src/ReplayContext.hpp>
-#include <src/ReplayLogsWindow.hpp>
-#include <src/ReplayEntitiesWindow.hpp>
-#include <src/ReplayTimelineSlider.hpp>
-#include <src/ReplayViewportWindow.hpp>
 #include <ReplayWindowsLayout.hpp>
 
 // Global WebGPU required states
@@ -86,6 +82,17 @@ int main(int, char**)
     // For an Emscripten build we are disabling file-system access, so let's not attempt to do a fopen() of the imgui.ini file.
     // You may manually call LoadIniSettingsFromMemory() to load settings from your own storage.
     io.IniFilename = nullptr;
+    
+    // Manually load layout 
+    std::ifstream t;
+    t.open("imgui.ini");
+    t.seekg(0, std::ios::end);
+    size_t size = t.tellg();
+    std::string buffer(size, ' ');
+    t.seekg(0);
+    t.read(&buffer[0], size);
+    //printf(buffer.c_str());
+    ImGui::LoadIniSettingsFromMemory(buffer.c_str());
 
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
@@ -189,6 +196,8 @@ static void MainLoopStep(void* window)
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
+    ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
+
     // Our state
     // (we use static, which essentially makes the variable globals, as a convenience to keep the example code easy to follow)
     static bool show_demo_window = true;
@@ -198,6 +207,31 @@ static void MainLoopStep(void* window)
     // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
     if (show_demo_window)
         ImGui::ShowDemoWindow(&show_demo_window);
+
+    if (ImGui::BeginMainMenuBar())
+    {
+        if (ImGui::BeginMenu("File"))
+        {
+            //ShowExampleMenuFile();
+            if (ImGui::MenuItem("Save layout", "CTRL+S")) 
+            {
+                const char* iniString = ImGui::SaveIniSettingsToMemory();
+                printf("%s\n", iniString);
+            }
+            ImGui::EndMenu();
+        }
+        if (ImGui::BeginMenu("Edit"))
+        {
+            if (ImGui::MenuItem("Undo", "CTRL+Z")) {}
+            if (ImGui::MenuItem("Redo", "CTRL+Y", false, false)) {}  // Disabled item
+            ImGui::Separator();
+            if (ImGui::MenuItem("Cut", "CTRL+X")) {}
+            if (ImGui::MenuItem("Copy", "CTRL+C")) {}
+            if (ImGui::MenuItem("Paste", "CTRL+V")) {}
+            ImGui::EndMenu();
+        }
+        ImGui::EndMainMenuBar();
+    }
 
     s_replayLayout.Draw();
 

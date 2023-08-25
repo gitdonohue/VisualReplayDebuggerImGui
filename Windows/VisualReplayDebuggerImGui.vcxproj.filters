@@ -215,4 +215,9 @@
       <Filter>Source Files\src\MatrixUtil</Filter>
     </Natvis>
   </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="..\imgui.ini">
+      <Filter>Resource Files</Filter>
+    </CopyFileToFolders>
+  </ItemGroup>
 </Project>

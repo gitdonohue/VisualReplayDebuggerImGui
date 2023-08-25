@@ -189,7 +189,7 @@ var REMOTE_PACKAGE_SIZE = metadata['remote_package_size'];
     }
 
     }
-    loadPackage({"files": [{"filename": "/sample.vrd", "start": 0, "end": 318705}], "remote_package_size": 318705});
+    loadPackage({"files": [{"filename": "/imgui.ini", "start": 0, "end": 1571}, {"filename": "/sample.vrd", "start": 1571, "end": 320276}], "remote_package_size": 320276});
 
   })();
 
@@ -9518,8 +9518,8 @@ var dynCall_viijii = Module['dynCall_viijii'] = createExportWrapper('dynCall_vii
 var dynCall_iiiiij = Module['dynCall_iiiiij'] = createExportWrapper('dynCall_iiiiij');
 var dynCall_iiiiijj = Module['dynCall_iiiiijj'] = createExportWrapper('dynCall_iiiiijj');
 var dynCall_iiiiiijj = Module['dynCall_iiiiiijj'] = createExportWrapper('dynCall_iiiiiijj');
-var ___start_em_js = Module['___start_em_js'] = 247188;
-var ___stop_em_js = Module['___stop_em_js'] = 247294;
+var ___start_em_js = Module['___start_em_js'] = 248444;
+var ___stop_em_js = Module['___stop_em_js'] = 248550;
 
 // include: postamble.js
 // === Auto-generated postamble setup entry stuff ===

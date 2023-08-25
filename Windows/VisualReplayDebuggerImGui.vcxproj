@@ -210,6 +210,12 @@
   <ItemGroup>
     <Natvis Include="..\src\MatrixUtil\matrixutil.natvis" />
   </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="..\imgui.ini">
+      <DeploymentContent>true</DeploymentContent>
+      <FileType>Document</FileType>
+    </CopyFileToFolders>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

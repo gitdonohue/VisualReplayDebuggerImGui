@@ -55,7 +55,7 @@
       <EnableMemoryGrowth>true</EnableMemoryGrowth>
       <EmBind>true</EmBind>
       <EchoCommandLines>true</EchoCommandLines>
-      <PreloadFile>../sample.vrd@/sample.vrd;</PreloadFile>
+      <PreloadFile>../sample.vrd@/sample.vrd;../imgui.ini@/imgui.ini;</PreloadFile>
     </Link>
     <ProjectReference />
     <ProjectReference>
@@ -75,7 +75,7 @@
       <EnableMemoryGrowth>true</EnableMemoryGrowth>
       <EmBind>true</EmBind>
       <EchoCommandLines>true</EchoCommandLines>
-      <PreloadFile>../sample.vrd@/sample.vrd;</PreloadFile>
+      <PreloadFile>../sample.vrd@/sample.vrd;../imgui.ini@/imgui.ini;</PreloadFile>
     </Link>
     <ProjectReference />
     <ProjectReference>

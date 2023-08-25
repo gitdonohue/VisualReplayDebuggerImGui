@@ -93,7 +93,6 @@ int main(int, char**)
     ImGui::StyleColorsDark();
     //ImGui::StyleColorsLight();
 
-    //ImGui::DockSpaceOverViewport(ImGui::GetMainViewport());
 
     // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
     ImGuiStyle& style = ImGui::GetStyle();
@@ -125,7 +124,7 @@ int main(int, char**)
     //ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());
     //IM_ASSERT(font != nullptr);
 
-    io.FontDefault = io.Fonts->Fonts[1];
+    io.FontDefault = io.Fonts->Fonts[0];
 
     // Our state
     bool show_demo_window = true;
