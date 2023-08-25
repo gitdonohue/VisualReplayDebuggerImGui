@@ -59,6 +59,12 @@
     <ClCompile Include="..\src\ImGuizmo\ImGuizmo.cpp">
       <Filter>src\imguizmo</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\ReplayGraphWindow.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ReplayWindowsLayout.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\imgui\imstb_truetype.h">
@@ -120,6 +126,15 @@
     </ClInclude>
     <ClInclude Include="..\src\ImGuizmo\ImGuizmo.h">
       <Filter>src\imguizmo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ReplayGraphWindow.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ReplayWidgetBase.hpp">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\ReplayWindowsLayout.hpp">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

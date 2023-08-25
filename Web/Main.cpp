@@ -1,12 +1,4 @@
-﻿//#include <stdio.h>
-//#include <emscripten.h>
-//
-//int main() {
-//	printf("Hello, world!");
-//	return 0;
-//}
-
-// Dear ImGui: standalone example application for Emscripten, using GLFW + WebGPU
+﻿// Dear ImGui: standalone example application for Emscripten, using GLFW + WebGPU
 // (Emscripten is a C++-to-javascript compiler, used to publish executables for the web. See https://emscripten.org/)
 // If you are new to Dear ImGui, read documentation from the docs/ folder + read the top of imgui.cpp.
 // Read online: https://github.com/ocornut/imgui/tree/master/docs
@@ -29,6 +21,7 @@
 #include <src/ReplayEntitiesWindow.hpp>
 #include <src/ReplayTimelineSlider.hpp>
 #include <src/ReplayViewportWindow.hpp>
+#include <ReplayWindowsLayout.hpp>
 
 // Global WebGPU required states
 static WGPUDevice    wgpu_device = nullptr;
@@ -49,10 +42,7 @@ EM_JS(void, resizeCanvas, (), { js_resizeCanvas(); });
 
 static VisualReplayDebugger::ReplayData s_replayData;
 static VisualReplayDebugger::ReplayContext s_pReplayContext;
-static VisualReplayDebugger::ReplayLogsWindow* s_pLogsWindow = nullptr;
-static VisualReplayDebugger::ReplayEntitiesWindow* s_entitiesWindow = nullptr;
-static VisualReplayDebugger::ReplayTimelineWindow* s_timelineWindow = nullptr;
-static VisualReplayDebugger::ReplayViewportWindow* s_viewport = nullptr;
+static VisualReplayDebugger::ReplayWindowsLayout s_replayLayout(s_pReplayContext);
 
 // Main code
 int main(int, char**)
@@ -60,10 +50,6 @@ int main(int, char**)
     std::ifstream ifs("sample.vrd", std::ifstream::in | std::ifstream::app | std::ifstream::binary);
     s_replayData.Read(ifs);
     s_pReplayContext.SetData(s_replayData);
-    s_pLogsWindow = new VisualReplayDebugger::ReplayLogsWindow(s_pReplayContext);
-    s_entitiesWindow = new VisualReplayDebugger::ReplayEntitiesWindow(s_pReplayContext);
-    s_timelineWindow = new VisualReplayDebugger::ReplayTimelineWindow(s_pReplayContext);
-    s_viewport = new VisualReplayDebugger::ReplayViewportWindow(s_pReplayContext);
 
     glfwSetErrorCallback(print_glfw_error);
     if (!glfwInit())
@@ -212,43 +198,8 @@ static void MainLoopStep(void* window)
     // 1. Show the big demo window (Most of the sample code is in ImGui::ShowDemoWindow()! You can browse its code to learn more about Dear ImGui!).
     if (show_demo_window)
         ImGui::ShowDemoWindow(&show_demo_window);
-    /*
-        // 2. Show a simple window that we create ourselves. We use a Begin/End pair to create a named window.
-        {
-            static float f = 0.0f;
-            static int counter = 0;
 
-            ImGui::Begin("Hello, world!");                                // Create a window called "Hello, world!" and append into it.
-
-            ImGui::Text("This is some useful text.");                     // Display some text (you can use a format strings too)
-            ImGui::Checkbox("Demo Window", &show_demo_window);            // Edit bools storing our window open/close state
-            ImGui::Checkbox("Another Window", &show_another_window);
-
-            ImGui::SliderFloat("float", &f, 0.0f, 1.0f);                  // Edit 1 float using a slider from 0.0f to 1.0f
-            ImGui::ColorEdit3("clear color", (float*)&clear_color);       // Edit 3 floats representing a color
-
-            if (ImGui::Button("Button"))                                  // Buttons return true when clicked (most widgets return true when edited/activated)
-                counter++;
-            ImGui::SameLine();
-            ImGui::Text("counter = %d", counter);
-
-            ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
-            ImGui::End();
-        }
-    */
-        //// 3. Show another simple window.
-        //if (s_pLogsWindow != nullptr)
-        //{
-        //    ImGui::Begin("Another Window");
-        //    ImGui::Text("Hello from another window!");
-        //    s_pLogsWindow->Draw();
-        //    ImGui::End();
-        //}
-
-    s_timelineWindow->Draw();
-    s_entitiesWindow->Draw();
-    s_pLogsWindow->Draw();
-    s_viewport->Draw();
+    s_replayLayout.Draw();
 
     // Rendering
     ImGui::Render();

@@ -10,7 +10,8 @@ namespace VisualReplayDebugger
 	{
 	public:
 		inline ReplayViewportWindow(ReplayContext& ctx) : ReplayWidgetBase(ctx) {};
-		
+	
+	protected:
 		void DataChanged() override;
 		void DrawImpl() override;
 	private:

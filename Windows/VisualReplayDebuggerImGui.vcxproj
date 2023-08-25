@@ -166,6 +166,7 @@
     <ClCompile Include="..\src\ReplayData.cpp" />
     <ClCompile Include="..\src\ReplayTimelineSlider.cpp" />
     <ClCompile Include="..\src\ReplayViewportWindow.cpp" />
+    <ClCompile Include="..\src\ReplayWindowsLayout.cpp" />
     <ClCompile Include="main_win32.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +205,7 @@
     <ClInclude Include="..\src\ReplayTimelineSlider.hpp" />
     <ClInclude Include="..\src\ReplayViewportWindow.hpp" />
     <ClInclude Include="..\src\ReplayWidgetBase.hpp" />
+    <ClInclude Include="..\src\ReplayWindowsLayout.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Natvis Include="..\src\MatrixUtil\matrixutil.natvis" />

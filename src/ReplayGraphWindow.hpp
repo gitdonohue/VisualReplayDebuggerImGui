@@ -8,6 +8,7 @@ namespace VisualReplayDebugger
 	{
 	public:
 		inline ReplayGraphWindow(ReplayContext& ctx) : ReplayWidgetBase(ctx) {}
+	protected:
 		inline void DataChanged() override {}
 		void DrawImpl() override;
 	};
@@ -16,6 +17,7 @@ namespace VisualReplayDebugger
 	{
 	public:
 		inline ReplayGraph(ReplayContext& ctx) : ReplayWidgetBase(ctx) {}
+	protected:
 		inline void DataChanged() override {}
 		void DrawImpl() override;
 	};

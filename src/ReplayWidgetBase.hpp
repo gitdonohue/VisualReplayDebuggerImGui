@@ -8,10 +8,11 @@ namespace VisualReplayDebugger
 	public:
 		inline ReplayWidgetBase(ReplayContext& replayContext) : replayContext(replayContext){}
 		
-	public:
+	protected:
 		virtual void DataChanged() = 0;
 		virtual void DrawImpl() = 0;
 
+	public:
 		inline void Draw()
 		{
 			if (replayContext.dataGen != lastDataGen)
