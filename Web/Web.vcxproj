@@ -51,7 +51,7 @@
     <Link>
       <AdditionalLinkDirectories>..\libs</AdditionalLinkDirectories>
       <AdditionalDependencies>glfw;glfw3;GL</AdditionalDependencies>
-      <AdditionalOptions>-s USE_GLFW=3 -s USE_WEBGPU=1 -s WASM=1 -s NO_EXIT_RUNTIME=0 -s ASSERTIONS=1 %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions>-s USE_GLFW=3 -s USE_WEBGPU=1 -s WASM=1 -s NO_EXIT_RUNTIME=0 -s ASSERTIONS=1 -s EXPORTED_RUNTIME_METHODS=[ccall] -s EXPORTED_FUNCTIONS=[_main,_malloc,_free] %(AdditionalOptions)</AdditionalOptions>
       <EnableMemoryGrowth>true</EnableMemoryGrowth>
       <EmBind>true</EmBind>
       <EchoCommandLines>true</EchoCommandLines>
@@ -132,6 +132,7 @@
     <ClInclude Include="..\src\ReplayViewportWindow.hpp" />
     <ClInclude Include="..\src\ReplayWidgetBase.hpp" />
     <ClInclude Include="..\src\ReplayWindowsLayout.hpp" />
+    <ClInclude Include="emscripten_browser_file.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\docs\index.html" />

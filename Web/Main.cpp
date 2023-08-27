@@ -14,10 +14,14 @@
 #include <webgpu/webgpu.h>
 #include <webgpu/webgpu_cpp.h>
 #include <fstream>
+#include <streambuf>
+#include <strstream>
 
 #include <src/ReplayData.hpp>
 #include <src/ReplayContext.hpp>
 #include <ReplayWindowsLayout.hpp>
+
+#include "emscripten_browser_file.h"
 
 // Global WebGPU required states
 static WGPUDevice    wgpu_device = nullptr;
@@ -40,9 +44,17 @@ static VisualReplayDebugger::ReplayData s_replayData;
 static VisualReplayDebugger::ReplayContext s_pReplayContext;
 static VisualReplayDebugger::ReplayWindowsLayout s_replayLayout(s_pReplayContext);
 
+void handle_upload_file(std::string const& filename, std::string const& mime_type, std::string_view buffer, void*) 
+{
+    std::istrstream memistream(buffer.begin(), buffer.size());
+    s_replayData.Read(memistream);
+    s_pReplayContext.SetData(s_replayData);
+}
+
 // Main code
 int main(int, char**)
 {
+    // Auto-load sample data
     std::ifstream ifs("sample.vrd", std::ifstream::in | std::ifstream::app | std::ifstream::binary);
     s_replayData.Read(ifs);
     s_pReplayContext.SetData(s_replayData);
@@ -180,6 +192,11 @@ static void MainLoopStep(void* window)
     {
         if (ImGui::BeginMenu("File"))
         {
+            if (ImGui::MenuItem("Open file", "CTRL+O"))
+            {
+                emscripten_browser_file::upload(".vrd", handle_upload_file);
+            }
+
             //ShowExampleMenuFile();
             if (ImGui::MenuItem("Save layout", "CTRL+S")) 
             {
