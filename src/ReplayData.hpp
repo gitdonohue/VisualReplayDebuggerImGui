@@ -67,17 +67,10 @@ namespace VisualReplayDebugger
 		std::map<std::string, std::string> StaticParameters;
 		int CreationFrame = -1;
 		int DestructionFrame = -1;
-
 		int RegistrationFrame = -1;
-		bool HasTransforms = false;
-		bool HasLogs = false;
-		bool HasLogsPastFirstFrame = false;
-		bool HasDraws = false;
-		bool HasMesh = false;
-		bool HasParameters = false;
-		bool HasNumericParameters = false;
 
 		std::vector<LogEntry*> Logs;
+		TimeStampedList<Transform> Transforms;
 
 		std::map<std::string, TimeStampedList<std::string>> DynamicProperties;
 		std::map<std::string, TimeStampedList<float>> DynamicValues;
@@ -94,6 +87,22 @@ namespace VisualReplayDebugger
 		}
 
 		friend class ReplayData;
+	};
+
+	
+	enum EntityDrawCommandType { None, Line, Circle, Sphere, Box, Capsule, Mesh };
+
+	struct EntityDrawCommand
+	{
+		const Entity* entity = nullptr;
+		int frame = -1;
+		std::string category;
+		EntityDrawCommandType type;
+		Color color;
+		Transform xform;
+		Point p2;
+		float scale = 1;
+		std::vector<Point> verts;
 	};
 
 	class ReplayData
@@ -128,6 +137,7 @@ namespace VisualReplayDebugger
 		std::set<std::string> entityCategories;
 
 		std::vector<LogEntry> logs;
+		std::vector<EntityDrawCommand> drawCommands;
 
 	public:
 		static int GetColorValue(const Color& c);

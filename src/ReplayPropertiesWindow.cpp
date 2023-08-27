@@ -34,13 +34,13 @@ void ReplayPropertiesWindow::DrawImpl()
         for (const auto& valueEntry : entity->DynamicProperties)
         {
             const std::string& valueAtFrame = valueEntry.second.AtFrame(replayContext.cursorFrame);
-            ImGui::LabelText(valueAtFrame.c_str(), valueEntry.first.c_str());
+            ImGui::LabelText(valueAtFrame.c_str(), "%s", valueEntry.first.c_str());
         }
 
         // static properties
         for (const auto& staticParam : entity->StaticParameters)
         {
-            ImGui::LabelText(staticParam.first.c_str(), staticParam.second.c_str());
+            ImGui::LabelText(staticParam.first.c_str(), "%s", staticParam.second.c_str());
         }
     }
 

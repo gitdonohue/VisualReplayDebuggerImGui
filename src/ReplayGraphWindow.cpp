@@ -89,24 +89,26 @@ void ReplayGraphWindow::DrawImpl()
             draw_list.PathStroke(IM_COL32(255, 0, 0, 255), 0, 1.5f);
             //draw_list.AddLine(canvas_p0,canvas_p1, IM_COL32(255, 0, 0, 255), 1.0f);
 
+            int numFrames = replayContext.roi.end - replayContext.roi.start;
+
             // Transform all datapoints
             // This could be optimized
             const float biasX = canvas_p0.x;
-            const float scaleX = canvas_sz.x / frameCount;
+            const float scaleX = canvas_sz.x / numFrames;
             const float scaleY = graphHeight; // assuming data normalized
-            for (int i = 0; i < frameCount; ++i)
+            for (int i = replayContext.roi.start; i < replayContext.roi.end; ++i)
             {
                 float v = pts[i];
                 auto& pt = workBuffer[i];
-                pt.x = canvas_p0.x + i * scaleX;
+                pt.x = canvas_p0.x + (i - replayContext.roi.start) * scaleX;
                 pt.y = (canvas_p0.y + graphHeight) - ( v * scaleY );
             }
 
             //draw_list.AddConvexPolyFilled(reinterpret_cast<ImVec2*>(&workBuffer[0]), workBuffer.size(), IM_COL32(0, 255, 0, 64));
-            draw_list.AddPolyline(reinterpret_cast<ImVec2*>(&workBuffer[0]), workBuffer.size(), IM_COL32(0, 255, 0, 255), ImDrawFlags_None, 2.0f);
+            draw_list.AddPolyline(reinterpret_cast<ImVec2*>(&workBuffer[replayContext.roi.start]), numFrames, IM_COL32(0, 255, 0, 255), ImDrawFlags_None, 2.0f);
             
             // draw cursor
-            float cursorX = canvas_p0.x + canvas_sz.x * replayContext.cursorFrame / frameCount;
+            float cursorX = canvas_p0.x + canvas_sz.x * (replayContext.cursorFrame - replayContext.roi.start) / numFrames;
             draw_list.AddLine(ImVec2(cursorX, canvas_p0.y), ImVec2(cursorX, canvas_p0.y + graphHeight), IM_COL32(255, 0, 0, 255), 2.0f);
 
             draw_list.PopClipRect();

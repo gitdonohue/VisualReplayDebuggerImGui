@@ -11,6 +11,8 @@
 #include <set>
 #include <algorithm>
 
+#define DECOMPRESS_BUFF_SZ 200000000
+
 using namespace VisualReplayDebugger;
 
 // fwd decl
@@ -289,7 +291,7 @@ void ReplayData::Read(std::istream& input)
 		//
 		// TODO: Dynamic sizing OR streaming
 		//
-		unsigned int max_decompressed_data_size = 200000000; // As an example (max buffer size)
+		unsigned int max_decompressed_data_size = DECOMPRESS_BUFF_SZ;
 		std::string decompressed_data_buffer(max_decompressed_data_size, 0);
 
 		Decompressor example_decompressor = Decompressor();
@@ -363,19 +365,13 @@ void ReplayData::ReadInternal(std::istream& input)
 			case BlockType::EntitySetPos:
 			{
 				const Point p = ReadValue<Point>(input);
-				//if (!last_xforms.TryGetValue(entity, out Transform xform)) { xform = new Transform(); xform.Rotation.W = 1; }
-				//xform.Translation = p;
-				//EntitySetTransforms.For(entity) ? .AddForBake(frame, xform);
-				entity.HasTransforms = true;
-				//last_xforms[entity] = xform;
+				entity.Transforms.emplace_back(frame, Transform{ p });
 			}
 			break;
 			case BlockType::EntitySetTransform:
 			{
 				const Transform xForm = ReadTransform(input);
-				//EntitySetTransforms.For(entity) ? .AddForBake(frame, xform);
-				entity.HasTransforms = true;
-				//last_xforms[entity] = xform;
+				entity.Transforms.emplace_back(frame, xForm);
 			}
 			break;
 			case BlockType::EntityLog:
@@ -385,12 +381,10 @@ void ReplayData::ReadInternal(std::istream& input)
 				std::replace(msg.begin(), msg.end(), '\r', ' '); // newlines stripped
 				std::replace(msg.begin(), msg.end(), '\n', ' '); // newlines stripped
 				const Color color = ReadColor(input);
-				entity.HasLogs = true;
-				entity.HasLogsPastFirstFrame |= frame > entity.CreationFrame;
 				//LogCategories.Add(category);
 				//LogColors.Add(color);
 				//LogEntries.AddForBake(frame, (entity, category, msg, color));
-				logs.emplace_back(LogEntry{ (int)logs.size(), &entity, frame, GetTimeForFrame(frame), category, msg, color });
+				logs.emplace_back((int)logs.size(), &entity, frame, GetTimeForFrame(frame), category, msg, color);
 				//// Add per entity frame markers
 				//if (!LogEntityFrameMarkers.TryGetValue(entity, out var framesWithLogs))
 				//{
@@ -404,7 +398,6 @@ void ReplayData::ReadInternal(std::istream& input)
 			{
 				const std::string label = ReadString(input);
 				const std::string val = ReadString(input);
-				entity.HasParameters = true;
 				entity.AddDynamicProperty(label, val, frame);
 			}
 			break;
@@ -412,7 +405,6 @@ void ReplayData::ReadInternal(std::istream& input)
 			{
 				const std::string label = ReadString(input);
 				const float val = ReadValue<float>(input);
-				entity.HasNumericParameters = true;
 				entity.AddDynamicValue(label, val, frame);
 			}
 			break;
@@ -422,7 +414,7 @@ void ReplayData::ReadInternal(std::istream& input)
 				const Point p1 = ReadValue<Point>(input);
 				const Point p2 = ReadValue<Point>(input);
 				const Color color = ReadColor(input);
-				//AddDrawCommand(frame, new EntityDrawCommand(){ entity = entity, category = category, type = EntityDrawCommandType.Line, color = color, frame = frame, xform = new Transform() { Translation = p1 }, p2 = p2, scale = 1 });
+				drawCommands.emplace_back(&entity, frame, category, EntityDrawCommandType::Line, color, Transform { p1 }, p2);
 			}
 			break;
 			case BlockType::EntityCircle:
@@ -432,7 +424,7 @@ void ReplayData::ReadInternal(std::istream& input)
 				const Point up = ReadValue<Point>(input);
 				const float radius = ReadValue<float>(input);
 				const Color color = ReadColor(input);
-				//AddDrawCommand(frame, new EntityDrawCommand(){ entity = entity, category = category, type = EntityDrawCommandType.Circle, color = color, frame = frame, xform = new Transform() { Translation = center }, p2 = up, scale = radius });
+				drawCommands.emplace_back(&entity, frame, category, EntityDrawCommandType::Circle, color, Transform { center }, up, radius);
 			}
 			break;
 			case BlockType::EntitySphere:
@@ -441,7 +433,7 @@ void ReplayData::ReadInternal(std::istream& input)
 				const Point center = ReadValue<Point>(input);
 				const float radius = ReadValue<float>(input);
 				const Color color = ReadColor(input);
-				//AddDrawCommand(frame, new EntityDrawCommand(){ entity = entity, category = category, type = EntityDrawCommandType.Sphere, color = color, frame = frame, xform = new Transform() { Translation = center }, scale = radius });
+				drawCommands.emplace_back(&entity, frame, category, EntityDrawCommandType::Sphere, color, Transform { center }, Point(), radius);
 			}
 			break;
 			case BlockType::EntityBox:
@@ -450,7 +442,7 @@ void ReplayData::ReadInternal(std::istream& input)
 				const Transform xForm = ReadTransform(input);
 				const Point dimensions = ReadValue<Point>(input);
 				const Color color = ReadColor(input);
-				//AddDrawCommand(frame, new EntityDrawCommand(){ entity = entity, category = category, type = EntityDrawCommandType.Box, color = color, frame = frame, xform = xform, p2 = dimensions, scale = 1 });
+				drawCommands.emplace_back(&entity, frame, category, EntityDrawCommandType::Box, color, xForm, dimensions);
 			}
 			break;
 			case BlockType::EntityCapsule:
@@ -460,19 +452,18 @@ void ReplayData::ReadInternal(std::istream& input)
 				const Point p2 = ReadValue<Point>(input);
 				const float radius = ReadValue<float>(input);
 				const Color color = ReadColor(input);
-				//AddDrawCommand(frame, new EntityDrawCommand(){ entity = entity, category = category, type = EntityDrawCommandType.Capsule, color = color, frame = frame, xform = new Transform() { Translation = p1 }, p2 = p2, scale = radius });
+				drawCommands.emplace_back(&entity, frame, category, EntityDrawCommandType::Capsule, color, Transform { p1 }, p2, radius);
 			}
 			break;
 			case BlockType::EntityMesh:
 			{
 				const std::string category = ReadString(input);
+				EntityDrawCommand dc{ &entity, frame, category, EntityDrawCommandType::Mesh };
 				const int vertexCount = ReadValue<int>(input);
-				std::vector<Point> verts;
-				verts.resize(vertexCount);
-				input.read((char*) &verts[0], sizeof(Point) * vertexCount);
-				const Color color = ReadColor(input);
-				entity.HasMesh = true;
-				//AddDrawCommand(frame, new EntityDrawCommand(){ entity = entity, category = category, type = EntityDrawCommandType.Mesh, verts = verts, color = color, frame = frame });
+				dc.verts.resize(vertexCount);
+				input.read((char*) &dc.verts[0], sizeof(Point) * vertexCount);
+				dc.color = ReadColor(input);
+				drawCommands.push_back(std::move(dc));
 			}
 			break;
 			default:
@@ -488,6 +479,7 @@ void ReplayData::ReadInternal(std::istream& input)
 		logEntry.entity->Logs.push_back(&logEntry);
 	}
  }
+
 
  float ReplayData::GetTotalTime() const
  {
